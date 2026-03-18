@@ -27,14 +27,14 @@ class FileGetContents extends AbstractRetriever
      *
      * @see \JsonSchema\Uri\Retrievers\UriRetrieverInterface::retrieve()
      */
-    public function retrieve($uri)
+    public function retrieve($uri): string
     {
         if (function_exists('http_clear_last_response_headers')) {
             http_clear_last_response_headers();
         }
 
         $errorMessage = null;
-        set_error_handler(function ($errno, $errstr) use (&$errorMessage) {
+        set_error_handler(function ($errno, $errstr) use (&$errorMessage): void {
             $errorMessage = $errstr;
         });
         $response = file_get_contents($uri);
@@ -92,10 +92,8 @@ class FileGetContents extends AbstractRetriever
 
     /**
      * @param string $header
-     *
-     * @return string|null
      */
-    protected static function getContentTypeMatchInHeader($header)
+    protected static function getContentTypeMatchInHeader($header): ?string
     {
         if (0 < preg_match("/Content-Type:(\V*)/ims", $header, $match)) {
             return trim($match[1]);

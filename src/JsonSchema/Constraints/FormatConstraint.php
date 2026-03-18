@@ -152,7 +152,7 @@ class FormatConstraint extends Constraint
         }
     }
 
-    protected function validateDateTime($datetime, $format)
+    protected function validateDateTime($datetime, $format): bool
     {
         $dt = \DateTime::createFromFormat($format, (string) $datetime);
 
@@ -191,7 +191,7 @@ class FormatConstraint extends Constraint
         return preg_match('/^#([a-f0-9]{3}|[a-f0-9]{6})$/i', $color);
     }
 
-    protected function validateStyle($style)
+    protected function validateStyle($style): bool
     {
         $properties     = explode(';', rtrim($style, ';'));
         $invalidEntries = preg_grep('/^\s*[-a-z]+\s*:\s*.+$/i', $properties, PREG_GREP_INVERT);

@@ -70,7 +70,7 @@ class NumberConstraint extends Constraint
         $this->checkFormat($element, $schema, $path, $i);
     }
 
-    private function fmod($number1, $number2)
+    private function fmod($number1, $number2): float
     {
         $modulus = ($number1 - round($number1 / $number2) * $number2);
         $precision = 0.0000000001;

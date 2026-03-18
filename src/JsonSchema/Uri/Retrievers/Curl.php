@@ -63,7 +63,7 @@ class Curl extends AbstractRetriever
     /**
      * @param string $response cURL HTTP response
      */
-    private function fetchMessageBody($response)
+    private function fetchMessageBody($response): void
     {
         preg_match("/(?:\r\n){2}(.*)$/ms", $response, $match);
         $this->messageBody = $match[1];
@@ -74,7 +74,7 @@ class Curl extends AbstractRetriever
      *
      * @return bool Whether the Content-Type header was found or not
      */
-    protected function fetchContentType($response)
+    protected function fetchContentType($response): bool
     {
         if (0 < preg_match("/Content-Type:(\V*)/ims", $response, $match)) {
             $this->contentType = trim($match[1]);

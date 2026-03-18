@@ -27,13 +27,11 @@ class ContainsConstraint implements ConstraintInterface
         if (!property_exists($schema, 'contains')) {
             return;
         }
-
-        $properties = [];
         if (!is_array($value)) {
             return;
         }
 
-        foreach ($value as $propertyName => $propertyValue) {
+        foreach ($value as $propertyValue) {
             $schemaConstraint = $this->factory->createInstanceFor('schema');
 
             $schemaConstraint->check($propertyValue, $schema->contains, $path, $i);

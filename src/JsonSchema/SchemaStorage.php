@@ -186,7 +186,7 @@ class SchemaStorage implements SchemaStorageInterface
         }
 
         if (is_object($refSchema) && array_keys(get_object_vars($refSchema)) === ['']) {
-            $refSchema = get_object_vars($refSchema)[''];
+            return get_object_vars($refSchema)[''];
         }
 
         return $refSchema;

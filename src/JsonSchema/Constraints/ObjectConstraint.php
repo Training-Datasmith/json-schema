@@ -49,7 +49,10 @@ class ObjectConstraint extends Constraint
         $this->validateElement($element, $matches, $schema, $path, $properties, $additionalProp);
     }
 
-    public function validatePatternProperties($element, ?JsonPointer $path, $patternProperties)
+    /**
+     * @return mixed[]
+     */
+    public function validatePatternProperties($element, ?JsonPointer $path, $patternProperties): array
     {
         $matches = [];
         foreach ($patternProperties as $pregex => $schema) {
@@ -82,7 +85,7 @@ class ObjectConstraint extends Constraint
      * @param mixed            $additionalProp Additional properties
      */
     public function validateElement($element, $matches, $schema = null, ?JsonPointer $path = null,
-        $properties = null, $additionalProp = null)
+        $properties = null, $additionalProp = null): void
     {
         $this->validateMinMaxConstraint($element, $schema, $path);
 
@@ -126,7 +129,7 @@ class ObjectConstraint extends Constraint
      * @param \stdClass        $properties Property definitions
      * @param JsonPointer|null $path       Path?
      */
-    public function validateProperties(&$element, $properties = null, ?JsonPointer $path = null)
+    public function validateProperties(&$element, $properties = null, ?JsonPointer $path = null): void
     {
         $undefinedConstraint = $this->factory->createInstanceFor('undefined');
 
@@ -152,9 +155,10 @@ class ObjectConstraint extends Constraint
      */
     protected function &getProperty(&$element, $property, $fallback = null)
     {
-        if (is_array($element) && (isset($element[$property]) || array_key_exists($property, $element)) /*$this->checkMode == self::CHECK_MODE_TYPE_CAST*/) {
+        if (is_array($element) && (isset($element[$property]) || array_key_exists($property, $element))) {
             return $element[$property];
-        } elseif (is_object($element) && property_exists($element, (string) $property)) {
+        }
+        if (is_object($element) && property_exists($element, (string) $property)) {
             return $element->$property;
         }
 

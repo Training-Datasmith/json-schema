@@ -6,12 +6,12 @@ namespace JsonSchema\Constraints\TypeCheck;
 
 class StrictTypeCheck implements TypeCheckInterface
 {
-    public static function isObject($value)
+    public static function isObject($value): bool
     {
         return is_object($value);
     }
 
-    public static function isArray($value)
+    public static function isArray($value): bool
     {
         return is_array($value);
     }
@@ -21,17 +21,17 @@ class StrictTypeCheck implements TypeCheckInterface
         return $value->{$property};
     }
 
-    public static function propertySet(&$value, $property, $data)
+    public static function propertySet(&$value, $property, $data): void
     {
         $value->{$property} = $data;
     }
 
-    public static function propertyExists($value, $property)
+    public static function propertyExists($value, $property): bool
     {
         return property_exists($value, $property);
     }
 
-    public static function propertyCount($value)
+    public static function propertyCount($value): int
     {
         if (!is_object($value)) {
             return 0;

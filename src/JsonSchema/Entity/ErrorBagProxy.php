@@ -14,7 +14,7 @@ use JsonSchema\Constraints\Factory;
 trait ErrorBagProxy
 {
     /** @var ?ErrorBag */
-    protected $errorBag = null;
+    protected $errorBag;
 
     /** @return ErrorList */
     public function getErrors(): array

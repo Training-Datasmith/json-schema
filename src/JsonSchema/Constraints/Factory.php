@@ -62,18 +62,18 @@ class Factory
      * @var array
      */
     protected $constraintMap = [
-        'array' => 'JsonSchema\Constraints\CollectionConstraint',
-        'collection' => 'JsonSchema\Constraints\CollectionConstraint',
-        'object' => 'JsonSchema\Constraints\ObjectConstraint',
-        'type' => 'JsonSchema\Constraints\TypeConstraint',
-        'undefined' => 'JsonSchema\Constraints\UndefinedConstraint',
-        'string' => 'JsonSchema\Constraints\StringConstraint',
-        'number' => 'JsonSchema\Constraints\NumberConstraint',
-        'enum' => 'JsonSchema\Constraints\EnumConstraint',
-        'const' => 'JsonSchema\Constraints\ConstConstraint',
-        'format' => 'JsonSchema\Constraints\FormatConstraint',
-        'schema' => 'JsonSchema\Constraints\SchemaConstraint',
-        'validator' => 'JsonSchema\Validator',
+        'array' => \JsonSchema\Constraints\CollectionConstraint::class,
+        'collection' => \JsonSchema\Constraints\CollectionConstraint::class,
+        'object' => \JsonSchema\Constraints\ObjectConstraint::class,
+        'type' => \JsonSchema\Constraints\TypeConstraint::class,
+        'undefined' => \JsonSchema\Constraints\UndefinedConstraint::class,
+        'string' => \JsonSchema\Constraints\StringConstraint::class,
+        'number' => \JsonSchema\Constraints\NumberConstraint::class,
+        'enum' => \JsonSchema\Constraints\EnumConstraint::class,
+        'const' => \JsonSchema\Constraints\ConstConstraint::class,
+        'format' => \JsonSchema\Constraints\FormatConstraint::class,
+        'schema' => \JsonSchema\Constraints\SchemaConstraint::class,
+        'validator' => \JsonSchema\Validator::class,
         'draft06' => Drafts\Draft06\Draft06Constraint::class,
         'draft07' => Drafts\Draft07\Draft07Constraint::class,
     ];
@@ -174,7 +174,7 @@ class Factory
             throw new InvalidArgumentException('Unknown constraint ' . $name);
         }
         // Ensure class is appropriate
-        if (!in_array('JsonSchema\Constraints\ConstraintInterface', class_implements($class))) {
+        if (!in_array(\JsonSchema\Constraints\ConstraintInterface::class, class_implements($class))) {
             throw new InvalidArgumentException('Invalid class ' . $name);
         }
         $this->constraintMap[$name] = $class;
@@ -185,14 +185,13 @@ class Factory
     /**
      * Create a constraint instance for the given constraint name.
      *
-     * @param string $constraintName
      *
      * @throws InvalidArgumentException if is not possible create the constraint instance
      *
      * @return ConstraintInterface&BaseConstraint
      * @phpstan-return ConstraintInterface&BaseConstraint
      */
-    public function createInstanceFor($constraintName)
+    public function createInstanceFor(string $constraintName)
     {
         if (!isset($this->constraintMap[$constraintName])) {
             throw new InvalidArgumentException('Unknown constraint ' . $constraintName);

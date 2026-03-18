@@ -44,7 +44,7 @@ class TypeConstraint extends Constraint
      */
     public function check(&$value = null, $schema = null, ?JsonPointer $path = null, $i = null): void
     {
-        $type = isset($schema->type) ? $schema->type : null;
+        $type = $schema->type ?? null;
         $isValid = false;
         $coerce = $this->factory->getConfig(self::CHECK_MODE_COERCE_TYPES);
         $earlyCoerce = $this->factory->getConfig(self::CHECK_MODE_EARLY_COERCE);
@@ -128,10 +128,8 @@ class TypeConstraint extends Constraint
      * @param array  $elements  The elements to implode
      * @param string $delimiter The delimiter to use
      * @param bool   $listEnd   The last delimiter to use (defaults to $delimiter)
-     *
-     * @return string
      */
-    protected function implodeWith(array $elements, $delimiter = ', ', $listEnd = false)
+    protected function implodeWith(array $elements, $delimiter = ', ', $listEnd = false): string
     {
         if ($listEnd === false || !isset($elements[1])) {
             return implode($delimiter, $elements);
@@ -173,7 +171,7 @@ class TypeConstraint extends Constraint
      *
      * @return bool
      */
-    protected function validateType(&$value, $type, $coerce = false)
+    protected function validateType(&$value, ?string $type, $coerce = false)
     {
         //mostly the case for inline schema
         if (!$type) {

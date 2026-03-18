@@ -48,10 +48,9 @@ class UndefinedConstraint extends Constraint
      *
      * @param mixed       $value
      * @param mixed       $schema
-     * @param JsonPointer $path
      * @param string      $i
      */
-    public function validateTypes(&$value, $schema, JsonPointer $path, $i = null)
+    public function validateTypes(&$value, $schema, JsonPointer $path, $i = null): void
     {
         // check array
         if ($this->getTypeCheck()->isArray($value)) {
@@ -67,9 +66,9 @@ class UndefinedConstraint extends Constraint
                 $value,
                 $schema,
                 $path,
-                isset($schema->properties) ? $schema->properties : null,
-                isset($schema->additionalProperties) ? $schema->additionalProperties : null,
-                isset($schema->patternProperties) ? $schema->patternProperties : null,
+                $schema->properties ?? null,
+                $schema->additionalProperties ?? null,
+                $schema->patternProperties ?? null,
                 $this->appliedDefaults
             );
         }
@@ -100,7 +99,6 @@ class UndefinedConstraint extends Constraint
      *
      * @param mixed       $value
      * @param mixed       $schema
-     * @param JsonPointer $path
      * @param string      $i
      */
     protected function validateCommonProperties(&$value, $schema, JsonPointer $path, $i = '')
@@ -198,11 +196,9 @@ class UndefinedConstraint extends Constraint
      *
      * @param mixed $schema
      * @param mixed $parentSchema
-     * @param bool  $requiredOnly
      *
-     * @return bool
      */
-    private function shouldApplyDefaultValue($requiredOnly, $schema, $name = null, $parentSchema = null)
+    private function shouldApplyDefaultValue(bool $requiredOnly, $schema, $name = null, $parentSchema = null): bool
     {
         // required-only mode is off
         if (!$requiredOnly) {
@@ -232,7 +228,7 @@ class UndefinedConstraint extends Constraint
      * @param mixed       $schema
      * @param JsonPointer $path
      */
-    protected function applyDefaultValues(&$value, $schema, $path): void
+    protected function applyDefaultValues(array &$value, $schema, $path): void
     {
         // only apply defaults if feature is enabled
         if (!$this->factory->getConfig(self::CHECK_MODE_APPLY_DEFAULTS)) {
@@ -307,7 +303,6 @@ class UndefinedConstraint extends Constraint
      *
      * @param mixed       $value
      * @param mixed       $schema
-     * @param JsonPointer $path
      * @param string      $i
      */
     protected function validateOfProperties(&$value, $schema, JsonPointer $path, $i = '')
@@ -390,7 +385,6 @@ class UndefinedConstraint extends Constraint
      *
      * @param mixed       $value
      * @param mixed       $dependencies
-     * @param JsonPointer $path
      * @param string      $i
      */
     protected function validateDependencies($value, $dependencies, JsonPointer $path, $i = '')

@@ -25,10 +25,8 @@ class UriResolver implements UriResolverInterface
      * Parses a URI into five main components
      *
      * @param string $uri
-     *
-     * @return array
      */
-    public function parse($uri)
+    public function parse($uri): array
     {
         preg_match('|^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?|', (string) $uri, $match);
 
@@ -53,11 +51,9 @@ class UriResolver implements UriResolverInterface
     /**
      * Builds a URI based on n array with the main components
      *
-     * @param array $components
      *
-     * @return string
      */
-    public function generate(array $components)
+    public function generate(array $components): string
     {
         $uri = $components['scheme'] . '://'
              . $components['authority']
@@ -167,20 +163,17 @@ class UriResolver implements UriResolverInterface
      *
      * @return string
      */
-    private static function normalizePath($path)
+    private static function normalizePath($path): ?string
     {
         $path = preg_replace('|((?<!\.)\./)*|', '', $path);
-        $path = preg_replace('|//|', '/', $path);
 
-        return $path;
+        return preg_replace('|//|', '/', $path);
     }
 
     /**
      * @param string $uri
-     *
-     * @return bool
      */
-    public function isValid($uri)
+    public function isValid($uri): bool
     {
         $components = $this->parse($uri);
 

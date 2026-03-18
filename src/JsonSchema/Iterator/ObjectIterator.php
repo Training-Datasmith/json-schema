@@ -100,7 +100,7 @@ class ObjectIterator implements \Iterator, \Countable
     /**
      * Initializer
      */
-    private function initialize()
+    private function initialize(): void
     {
         if (!$this->initialized) {
             $this->data = $this->buildDataFromObject($this->object);
@@ -110,10 +110,8 @@ class ObjectIterator implements \Iterator, \Countable
 
     /**
      * @param object $object
-     *
-     * @return array
      */
-    private function buildDataFromObject($object)
+    private function buildDataFromObject($object): array
     {
         $result = [];
 
@@ -126,7 +124,7 @@ class ObjectIterator implements \Iterator, \Countable
                 array_push($result, $current);
             }
 
-            foreach ($this->getDataFromItem($current) as $propertyName => $propertyValue) {
+            foreach ($this->getDataFromItem($current) as $propertyValue) {
                 if (is_object($propertyValue) || is_array($propertyValue)) {
                     $stack->push($propertyValue);
                 }

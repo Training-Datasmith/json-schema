@@ -45,7 +45,7 @@ class UriRetriever implements BaseUriRetrieverInterface
     /**
      * @var null|UriRetrieverInterface
      */
-    protected $uriRetriever = null;
+    protected $uriRetriever;
 
     /**
      * @var array|object[]
@@ -59,7 +59,7 @@ class UriRetriever implements BaseUriRetrieverInterface
      *
      * @param string $endpoint
      */
-    public function addInvalidContentTypeEndpoint($endpoint)
+    public function addInvalidContentTypeEndpoint($endpoint): void
     {
         $this->allowedInvalidContentTypeEndpoints[] = $endpoint;
     }
@@ -125,7 +125,7 @@ class UriRetriever implements BaseUriRetrieverInterface
      *
      * @return object JSON Schema after walking down the fragment pieces
      */
-    public function resolvePointer($jsonSchema, $uri)
+    public function resolvePointer($jsonSchema, string $uri)
     {
         $resolver = new UriResolver();
         $parsed = $resolver->parse($uri);
@@ -223,11 +223,10 @@ class UriRetriever implements BaseUriRetrieverInterface
     /**
      * Set the URI Retriever
      *
-     * @param UriRetrieverInterface $uriRetriever
      *
      * @return $this for chaining
      */
-    public function setUriRetriever(UriRetrieverInterface $uriRetriever)
+    public function setUriRetriever(UriRetrieverInterface $uriRetriever): self
     {
         $this->uriRetriever = $uriRetriever;
 
@@ -238,10 +237,8 @@ class UriRetriever implements BaseUriRetrieverInterface
      * Parses a URI into five main components
      *
      * @param string $uri
-     *
-     * @return array
      */
-    public function parse($uri)
+    public function parse($uri): array
     {
         preg_match('|^(([^:/?#]+):)?(//([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?|', $uri, $match);
 
@@ -268,11 +265,9 @@ class UriRetriever implements BaseUriRetrieverInterface
     /**
      * Builds a URI based on n array with the main components
      *
-     * @param array $components
      *
-     * @return string
      */
-    public function generate(array $components)
+    public function generate(array $components): string
     {
         $uri = $components['scheme'] . '://'
              . $components['authority']
@@ -316,10 +311,8 @@ class UriRetriever implements BaseUriRetrieverInterface
 
     /**
      * @param string $uri
-     *
-     * @return bool
      */
-    public function isValid($uri)
+    public function isValid($uri): bool
     {
         $components = $this->parse($uri);
 
@@ -329,7 +322,7 @@ class UriRetriever implements BaseUriRetrieverInterface
     /**
      * Set a URL translation rule
      */
-    public function setTranslation($from, $to)
+    public function setTranslation($from, $to): void
     {
         $this->translationMap[$from] = $to;
     }

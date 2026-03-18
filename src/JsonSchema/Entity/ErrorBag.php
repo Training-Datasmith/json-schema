@@ -90,7 +90,7 @@ class ErrorBag
 
         $this->errors = array_merge($this->errors, $errors);
         $errorMask = &$this->errorMask;
-        array_walk($errors, static function ($error) use (&$errorMask) {
+        array_walk($errors, static function (array $error) use (&$errorMask): void {
             $errorMask |= $error['context'];
         });
     }
@@ -98,7 +98,7 @@ class ErrorBag
     private function convertJsonPointerIntoPropertyPath(JsonPointer $pointer): string
     {
         $result = array_map(
-            static function ($path) {
+            static function (string $path): string {
                 return sprintf(is_numeric($path) ? '[%d]' : '.%s', $path);
             },
             $pointer->getPropertyPaths()

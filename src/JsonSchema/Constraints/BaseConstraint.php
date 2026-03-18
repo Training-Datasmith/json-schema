@@ -72,7 +72,7 @@ class BaseConstraint
         if ($errors) {
             $this->errors = array_merge($this->errors, $errors);
             $errorMask = &$this->errorMask;
-            array_walk($errors, static function ($error) use (&$errorMask) {
+            array_walk($errors, static function (array $error) use (&$errorMask): void {
                 if (isset($error['context'])) {
                     $errorMask |= $error['context'];
                 }
@@ -89,7 +89,7 @@ class BaseConstraint
             return $this->errors;
         }
 
-        return array_filter($this->errors, static function ($error) use ($errorContext) {
+        return array_filter($this->errors, static function (array $error) use ($errorContext): bool {
             return (bool) ($errorContext & $error['context']);
         });
     }
@@ -159,7 +159,7 @@ class BaseConstraint
     protected function convertJsonPointerIntoPropertyPath(JsonPointer $pointer): string
     {
         $result = array_map(
-            static function ($path) {
+            static function (string $path): string {
                 return sprintf(is_numeric($path) ? '[%d]' : '.%s', $path);
             },
             $pointer->getPropertyPaths()

@@ -12,8 +12,6 @@ class Rfc3339
      * Try creating a DateTime instance
      *
      * @param string $input
-     *
-     * @return \DateTime|null
      */
     public static function createFromString($input): ?\DateTime
     {

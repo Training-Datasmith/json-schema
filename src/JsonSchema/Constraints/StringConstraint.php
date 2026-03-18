@@ -51,7 +51,7 @@ class StringConstraint extends Constraint
         $this->checkFormat($element, $schema, $path, $i);
     }
 
-    private function strlen($string)
+    private function strlen($string): int
     {
         if (extension_loaded('mbstring')) {
             return mb_strlen($string, mb_detect_encoding($string));
