@@ -49,7 +49,7 @@ class Draft3Test extends BaseDraftTestCase
                 ]
             }
 JSON
-        , false);
+            , false);
 
         $schemaStorage = new SchemaStorage();
         $schemaStorage->addSchema(property_exists($schema, 'id') ? $schema->id : 'internal://mySchema', $schema);
@@ -72,7 +72,7 @@ JSON
     {
         return [
             realpath(__DIR__ . self::RELATIVE_TESTS_ROOT . '/draft3'),
-            realpath(__DIR__ . self::RELATIVE_TESTS_ROOT . '/draft3/optional')
+            realpath(__DIR__ . self::RELATIVE_TESTS_ROOT . '/draft3/optional'),
         ];
     }
 
@@ -114,7 +114,7 @@ JSON
             // Optional
             'bignum.json',
             'ecmascript-regex.json',
-            'zeroTerminatedFloats.json'
+            'zeroTerminatedFloats.json',
         ];
     }
 }

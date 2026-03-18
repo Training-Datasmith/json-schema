@@ -22,7 +22,7 @@ class MinMaxPropertiesTest extends BaseTestCase
               "properties": {
                 "value": {"type": "object", "minProperties": 0}
               }
-            }'
+            }',
         ];
         yield 'Empty object with maxProperties: 1' => [
             'input' => '{
@@ -33,7 +33,7 @@ class MinMaxPropertiesTest extends BaseTestCase
               "properties": {
                 "value": {"type": "object", "maxProperties": 1}
               }
-            }'
+            }',
         ];
         yield 'Empty object with minProperties: 0 and maxProperties: 1' => [
             'input' => '{
@@ -44,7 +44,7 @@ class MinMaxPropertiesTest extends BaseTestCase
               "properties": {
                 "value": {"type": "object", "minProperties": 0,"maxProperties": 1}
               }
-            }'
+            }',
         ];
         yield 'Object with two properties with minProperties: 1 and maxProperties: 2' => [
             'input' => '{
@@ -55,7 +55,7 @@ class MinMaxPropertiesTest extends BaseTestCase
               "properties": {
                 "value": {"type": "object", "minProperties": 1,"maxProperties": 2}
               }
-            }'
+            }',
         ];
         yield 'Empty array with minProperties: 1 and maxProperties: 2' => [
             'input' => '{
@@ -76,7 +76,7 @@ class MinMaxPropertiesTest extends BaseTestCase
               "properties": {
                 "value": {"maxProperties": 1}
               }
-            }'
+            }',
         ];
     }
 
@@ -91,7 +91,7 @@ class MinMaxPropertiesTest extends BaseTestCase
               "properties": {
                 "value": {"type": "object", "minProperties": 1}
               }
-            }'
+            }',
         ];
         yield 'Empty object with minProperties' => [
             'input' => '{}',
@@ -106,7 +106,7 @@ class MinMaxPropertiesTest extends BaseTestCase
                 }
               },
               "minProperties": 1
-            }'
+            }',
         ];
         yield 'Object with two properties with maxProperties: 1' => [
             'input' => '{
@@ -120,7 +120,7 @@ class MinMaxPropertiesTest extends BaseTestCase
               "properties": {
                 "value": {"type": "object", "maxProperties": 1}
               }
-            }'
+            }',
         ];
         yield 'Object with two properties with minProperties: 1 and maxProperties: 2' => [
             'input' => '{
@@ -131,7 +131,7 @@ class MinMaxPropertiesTest extends BaseTestCase
               "properties": {
                 "value": {"type": "object", "minProperties": 1,"maxProperties": 2}
               }
-            }'
+            }',
         ];
     }
 }

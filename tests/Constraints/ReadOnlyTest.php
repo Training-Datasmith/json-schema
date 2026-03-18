@@ -18,7 +18,7 @@ class ReadOnlyTest extends BaseTestCase
               "properties":{
                 "number":{"type":"string","readonly":true}
               }
-            }'
+            }',
         ];
     }
 
@@ -33,7 +33,7 @@ class ReadOnlyTest extends BaseTestCase
               "properties":{
                 "number":{"type":"string","readonly":true}
               }
-            }'
+            }',
         ];
     }
 }

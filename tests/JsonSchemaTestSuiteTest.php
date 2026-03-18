@@ -110,7 +110,7 @@ class JsonSchemaTestSuiteTest extends TestCase
                             'checkMode' => $this->getCheckModeForDraft($baseDraftName),
                             'draft' => DraftIdentifiers::fromConstraintName($baseDraftName),
                             'expectedValidationResult' => $test->valid,
-                            'optional' => str_contains($file->getPathname(), '/optional/')
+                            'optional' => str_contains($file->getPathname(), '/optional/'),
                         ];
                     }
                 }

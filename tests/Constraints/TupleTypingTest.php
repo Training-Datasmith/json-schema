@@ -26,7 +26,7 @@ class TupleTypingTest extends BaseTestCase
                   ]
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -44,7 +44,7 @@ class TupleTypingTest extends BaseTestCase
                   "additionalItems":false
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -62,7 +62,7 @@ class TupleTypingTest extends BaseTestCase
                   "additionalItems":{"type":"string"}
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{"data": [1, "foo", true, 1.5]}',
@@ -75,7 +75,7 @@ class TupleTypingTest extends BaseTestCase
                         "additionalItems": false
                     }
                 }
-            }'
+            }',
         ];
     }
 
@@ -96,7 +96,7 @@ class TupleTypingTest extends BaseTestCase
                   ]
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -113,7 +113,7 @@ class TupleTypingTest extends BaseTestCase
                   ]
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{"data": [1, "foo", true]}',
@@ -126,7 +126,7 @@ class TupleTypingTest extends BaseTestCase
                         "additionalItems": false
                     }
                 }
-            }'
+            }',
         ];
     }
 }

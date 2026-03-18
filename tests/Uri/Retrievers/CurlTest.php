@@ -46,7 +46,7 @@ namespace JsonSchema\Uri\Retrievers
         if ($uri === realpath(__DIR__ . '/../../fixtures/foobar.json')) {
             // return file with headers
             $headers = implode("\n", [
-                'Content-Type: application/json'
+                'Content-Type: application/json',
             ]);
 
             return sprintf("%s\r\n\r\n%s", $headers, file_get_contents($uri));

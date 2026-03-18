@@ -131,23 +131,23 @@ class SchemaStorageTest extends TestCase
             'type' => 'object',
             'additionalProperties' => true,
             'required' => [
-                'car'
+                'car',
             ],
             'properties' => (object) [
                 'car' => (object) [
-                    '$ref' => 'http://www.my-domain.com/schema2.json#/definitions/car'
+                    '$ref' => 'http://www.my-domain.com/schema2.json#/definitions/car',
                 ],
                 'house' => (object) [
                     'additionalProperties' => true,
-                    '$ref' => '#/definitions/house'
+                    '$ref' => '#/definitions/house',
                 ],
                 'yard' => (object) [
                     'type' => 'object',
                     'additionalProperties' => false,
                     'properties' => (object) [
-                        '$ref' => '#/definitions/yardproperties'
-                    ]
-                ]
+                        '$ref' => '#/definitions/yardproperties',
+                    ],
+                ],
             ],
             'definitions' => (object) [
                 'house'  => (object) [
@@ -155,29 +155,29 @@ class SchemaStorageTest extends TestCase
                     'additionalProperties' => false,
                     'required' => [
                         'door',
-                        'window'
+                        'window',
                     ],
                     'properties' => (object) [
                         'door' => (object) [
-                            'type' => 'string'
+                            'type' => 'string',
                         ],
                         'window' => (object) [
-                            'type' => 'string'
+                            'type' => 'string',
                         ],
                         'house' => (object) [
-                            '$ref' => '#/definitions/house'
-                        ]
-                    ]
+                            '$ref' => '#/definitions/house',
+                        ],
+                    ],
                 ],
                 'yardproperties' => (object) [
-                    'tree'=>(object) [
-                        'type' => 'string'
+                    'tree' => (object) [
+                        'type' => 'string',
                     ],
-                    'pool'=>(object) [
-                        'type' => 'string'
-                    ]
-                ]
-            ]
+                    'pool' => (object) [
+                        'type' => 'string',
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -193,18 +193,18 @@ class SchemaStorageTest extends TestCase
                     'additionalProperties' => false,
                     'properties' => (object) [
                         'id' => (object) [
-                            'type' => 'integer'
+                            'type' => 'integer',
                         ],
                         'name' => (object) [
                             'type' => 'string',
-                            'minLength' => 1
+                            'minLength' => 1,
                         ],
                         'wheel' => (object) [
-                            '$ref' => './schema3.json#/wheel'
-                        ]
-                    ]
-                ]
-            ]
+                            '$ref' => './schema3.json#/wheel',
+                        ],
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -217,16 +217,16 @@ class SchemaStorageTest extends TestCase
             'wheel' => (object) [
                 'properties' => (object) [
                     'spokes' => (object) [
-                        'type' => 'integer'
+                        'type' => 'integer',
                     ],
                     'size' => (object) [
-                        'type' => 'integer'
+                        'type' => 'integer',
                     ],
                     'car' => (object) [
-                        '$ref' => './schema2.json#/definitions/car'
-                    ]
-                ]
-            ]
+                        '$ref' => './schema2.json#/definitions/car',
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -238,21 +238,21 @@ class SchemaStorageTest extends TestCase
             'type' => 'object',
             'properties' => (object) [
                 'spokes' => (object) [
-                    'type' => 'integer'
+                    'type' => 'integer',
                 ],
                 'size' => (object) [
-                    'type' => 'integer'
+                    'type' => 'integer',
                 ],
                 'car' => (object) [
-                    '$ref' => '#/definitions/car'
-                ]
+                    '$ref' => '#/definitions/car',
+                ],
             ],
             'definitions' => (object) [
                 'date' => (object) [
                     'type' => 'string',
-                    'pattern' => '^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$'
-                ]
-            ]
+                    'pattern' => '^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$',
+                ],
+            ],
         ];
     }
 

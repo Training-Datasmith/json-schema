@@ -18,16 +18,16 @@ class PointerTest extends TestCase
             'required' => ['prop1', 'prop2', 'prop3', 'prop4'],
             'properties' => [
                 'prop1' => [
-                    'type' => 'string'
+                    'type' => 'string',
                 ],
                 'prop2' => [
                     'type' => 'object',
                     'required' => ['prop2.1'],
                     'properties' => [
                         'prop2.1' => [
-                            'type' => 'string'
-                        ]
-                    ]
+                            'type' => 'string',
+                        ],
+                    ],
                 ],
                 'prop3' => [
                     'type' => 'object',
@@ -38,11 +38,11 @@ class PointerTest extends TestCase
                             'required' => ['prop3/1.1'],
                             'properties' => [
                                 'prop3/1.1' => [
-                                    'type' => 'string'
-                                ]
-                            ]
-                        ]
-                    ]
+                                    'type' => 'string',
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
                 'prop4' => [
                     'type' => 'array',
@@ -52,28 +52,28 @@ class PointerTest extends TestCase
                         'required' => ['prop4-child'],
                         'properties' => [
                             'prop4-child' => [
-                                'type' => 'string'
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+                                'type' => 'string',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
 
         $value = [
             'prop2' => [
-                'foo' => 'bar'
+                'foo' => 'bar',
             ],
             'prop3' => [
                 'prop3/1' => [
-                    'foo' => 'bar'
-                ]
+                    'foo' => 'bar',
+                ],
             ],
             'prop4' => [
                 [
-                    'foo' => 'bar'
-                ]
-            ]
+                    'foo' => 'bar',
+                ],
+            ],
         ];
 
         $validator = new Validator();
@@ -89,10 +89,10 @@ class PointerTest extends TestCase
                     'constraint' => [
                         'name' => 'required',
                         'params' => [
-                            'property' => 'prop1'
-                        ]
+                            'property' => 'prop1',
+                        ],
                     ],
-                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION
+                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION,
                 ],
                 [
                     'property' => 'prop2.prop2.1',
@@ -101,10 +101,10 @@ class PointerTest extends TestCase
                     'constraint' => [
                         'name' => 'required',
                         'params' => [
-                            'property' => 'prop2.1'
-                        ]
+                            'property' => 'prop2.1',
+                        ],
                     ],
-                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION
+                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION,
                 ],
                 [
                     'property' => 'prop3.prop3/1.prop3/1.1',
@@ -113,10 +113,10 @@ class PointerTest extends TestCase
                     'constraint' => [
                         'name' => 'required',
                         'params' => [
-                            'property' => 'prop3/1.1'
-                        ]
+                            'property' => 'prop3/1.1',
+                        ],
                     ],
-                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION
+                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION,
                 ],
                 [
                     'property' => 'prop4[0].prop4-child',
@@ -125,11 +125,11 @@ class PointerTest extends TestCase
                     'constraint' => [
                         'name' => 'required',
                         'params' => [
-                            'property' => 'prop4-child'
-                        ]
+                            'property' => 'prop4-child',
+                        ],
                     ],
-                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION
-                ]
+                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION,
+                ],
             ],
             $validator->getErrors()
         );

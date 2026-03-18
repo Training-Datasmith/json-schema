@@ -84,9 +84,14 @@ class ObjectConstraint extends Constraint
      * @param \StdClass        $properties     Properties
      * @param mixed            $additionalProp Additional properties
      */
-    public function validateElement($element, $matches, $schema = null, ?JsonPointer $path = null,
-        $properties = null, $additionalProp = null): void
-    {
+    public function validateElement(
+        $element,
+        $matches,
+        $schema = null,
+        ?JsonPointer $path = null,
+        $properties = null,
+        $additionalProp = null
+    ): void {
         $this->validateMinMaxConstraint($element, $schema, $path);
 
         foreach ($element as $i => $value) {
@@ -111,7 +116,7 @@ class ObjectConstraint extends Constraint
             if ($require && !$this->getProperty($element, $require)) {
                 $this->addError(ConstraintError::REQUIRES(), $path, [
                     'property' => $i,
-                    'requiredProperty' => $require
+                    'requiredProperty' => $require,
                 ]);
             }
 

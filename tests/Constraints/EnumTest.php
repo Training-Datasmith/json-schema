@@ -25,7 +25,7 @@ class EnumTest extends BaseTestCase
                 "value":{"type":"string","enum":["Abacate","Manga","Pitanga"]}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{}',
@@ -39,7 +39,7 @@ class EnumTest extends BaseTestCase
                 }
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{"value": "4"}',
@@ -51,7 +51,7 @@ class EnumTest extends BaseTestCase
                     }
                 },
                 "additionalProperties": false
-            }'
+            }',
         ];
         yield [
             '{"value": {"foo": false}}',
@@ -63,7 +63,7 @@ class EnumTest extends BaseTestCase
                     }
                 },
                 "additionalProperties": false
-            }'
+            }',
         ];
         yield [
             '{
@@ -87,7 +87,7 @@ class EnumTest extends BaseTestCase
                         ]
                     }
                 }
-            }'
+            }',
         ];
     }
 
@@ -103,7 +103,7 @@ class EnumTest extends BaseTestCase
                 "value":{"type":"string","enum":["Abacate","Manga","Pitanga"]}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{}',
@@ -113,7 +113,7 @@ class EnumTest extends BaseTestCase
                 "value":{"type":"string","enum":["Abacate","Manga","Pitanga"]}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{}',
@@ -127,7 +127,7 @@ class EnumTest extends BaseTestCase
                 }
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{"value": 1}',
@@ -136,7 +136,7 @@ class EnumTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "integer", "enum": [1, 2, 3]}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": []}',
@@ -146,7 +146,7 @@ class EnumTest extends BaseTestCase
                     "value": {"type": "any", "enum": [6, "foo", [], true, {"foo": 12}]}
                 },
                 "additionalProperties": false
-            }'
+            }',
         ];
         yield [
             '{
@@ -170,7 +170,7 @@ class EnumTest extends BaseTestCase
                         ]
                     }
                 }
-            }'
+            }',
         ];
         yield 'Number values with mathematical equality are considered valid' => [
             'data' => '12',
@@ -179,7 +179,7 @@ class EnumTest extends BaseTestCase
                 "enum": [
                     12.0
                 ]
-            }'
+            }',
         ];
         yield 'Array with number values with mathematical equality are considered valid' => [
             'input' => '[ 0.0 ]',

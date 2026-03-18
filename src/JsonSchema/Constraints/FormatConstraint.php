@@ -38,9 +38,12 @@ class FormatConstraint extends Constraint
         switch ($schema->format) {
             case 'date':
                 if (is_string($element) && !$date = $this->validateDateTime($element, 'Y-m-d')) {
-                    $this->addError(ConstraintError::FORMAT_DATE(), $path, [
+                    $this->addError(
+                        ConstraintError::FORMAT_DATE(),
+                        $path,
+                        [
                             'date' => $element,
-                            'format' => $schema->format
+                            'format' => $schema->format,
                         ]
                     );
                 }
@@ -48,7 +51,10 @@ class FormatConstraint extends Constraint
 
             case 'time':
                 if (is_string($element) && !$this->validateDateTime($element, 'H:i:s')) {
-                    $this->addError(ConstraintError::FORMAT_TIME(), $path, [
+                    $this->addError(
+                        ConstraintError::FORMAT_TIME(),
+                        $path,
+                        [
                             'time' => json_encode($element),
                             'format' => $schema->format,
                         ]
@@ -58,9 +64,12 @@ class FormatConstraint extends Constraint
 
             case 'date-time':
                 if (is_string($element) && null === Rfc3339::createFromString($element)) {
-                    $this->addError(ConstraintError::FORMAT_DATE_TIME(), $path, [
+                    $this->addError(
+                        ConstraintError::FORMAT_DATE_TIME(),
+                        $path,
+                        [
                             'dateTime' => json_encode($element),
-                            'format' => $schema->format
+                            'format' => $schema->format,
                         ]
                     );
                 }
@@ -76,9 +85,12 @@ class FormatConstraint extends Constraint
 
             case 'regex':
                 if (!$this->validateRegex($element)) {
-                    $this->addError(ConstraintError::FORMAT_REGEX(), $path, [
+                    $this->addError(
+                        ConstraintError::FORMAT_REGEX(),
+                        $path,
+                        [
                             'value' => $element,
-                            'format' => $schema->format
+                            'format' => $schema->format,
                         ]
                     );
                 }

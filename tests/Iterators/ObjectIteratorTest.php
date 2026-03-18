@@ -17,16 +17,16 @@ class ObjectIteratorTest extends TestCase
             'subOne' => (object) [
                 'propertyOne' => 'valueOne',
                 'propertyTwo' => 'valueTwo',
-                'propertyThree' => 'valueThree'
+                'propertyThree' => 'valueThree',
             ],
             'subTwo' => (object) [
                 'propertyFour' => 'valueFour',
                 'subThree' => (object) [
                     'propertyFive' => 'valueFive',
-                    'propertySix' => 'valueSix'
-                ]
+                    'propertySix' => 'valueSix',
+                ],
             ],
-            'propertySeven' => 'valueSeven'
+            'propertySeven' => 'valueSeven',
         ];
     }
 
@@ -64,7 +64,7 @@ class ObjectIteratorTest extends TestCase
 
     public function testAlwaysObjects(): void
     {
-        $i= new ObjectIterator($this->testObject);
+        $i = new ObjectIterator($this->testObject);
 
         foreach ($i as $item) {
             $this->assertInstanceOf('\StdClass', $item);

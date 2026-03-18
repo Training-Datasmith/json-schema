@@ -35,7 +35,7 @@ class UriResolver implements UriResolverInterface
             $components =  [
                 'scheme'    => $match[2],
                 'authority' => $match[4],
-                'path'      => $match[5]
+                'path'      => $match[5],
             ];
         }
         if (7 < count($match)) {

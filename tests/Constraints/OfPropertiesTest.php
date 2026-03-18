@@ -28,7 +28,7 @@ class OfPropertiesTest extends BaseTestCase
                 }
               },
               "required": ["prop1"]
-            }'
+            }',
         ];
         yield [
             '{"prop1": "abc", "prop2": 23}',
@@ -44,7 +44,7 @@ class OfPropertiesTest extends BaseTestCase
                 }
               },
               "required": ["prop1"]
-            }'
+            }',
         ];
     }
 
@@ -75,10 +75,10 @@ class OfPropertiesTest extends BaseTestCase
                         'name' => 'type',
                         'params' => [
                             'expected'   => 'a string',
-                            'found'      => 'array'
-                        ]
+                            'found'      => 'array',
+                        ],
                     ],
-                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION
+                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION,
                 ],
                 [
                     'property'   => 'prop2',
@@ -88,10 +88,10 @@ class OfPropertiesTest extends BaseTestCase
                         'name' => 'type',
                         'params' => [
                             'expected'   => 'a number',
-                            'found'      => 'array'
-                        ]
+                            'found'      => 'array',
+                        ],
                     ],
-                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION
+                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION,
                 ],
                 [
                     'property'   => 'prop2',
@@ -99,9 +99,9 @@ class OfPropertiesTest extends BaseTestCase
                     'message'    => 'Failed to match exactly one schema',
                     'constraint' => [
                         'name' => 'oneOf',
-                        'params' => []
+                        'params' => [],
                     ],
-                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION
+                    'context'    => Validator::ERROR_DOCUMENT_VALIDATION,
                 ],
             ],
         ];
@@ -123,7 +123,7 @@ class OfPropertiesTest extends BaseTestCase
                   ]
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{"prop1": [1,2]}',
@@ -139,7 +139,7 @@ class OfPropertiesTest extends BaseTestCase
                   ]
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{"prop1": [1,2]}',
@@ -158,7 +158,7 @@ class OfPropertiesTest extends BaseTestCase
                   ]
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{"prop1": [1,2]}',
@@ -177,7 +177,7 @@ class OfPropertiesTest extends BaseTestCase
                   ]
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{"prop1": [1,2]}',
@@ -197,7 +197,7 @@ class OfPropertiesTest extends BaseTestCase
                   ]
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{"prop1": [1,2]}',
@@ -218,7 +218,7 @@ class OfPropertiesTest extends BaseTestCase
                   ]
                 }
               }
-            }'
+            }',
         ];
     }
 

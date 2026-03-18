@@ -25,7 +25,7 @@ class NotTest extends BaseTestCase
                         }
                     }
                 }
-            }'
+            }',
         ];
         yield 'check that a missing, required property is correctly validated' => [
             '{"y": "foo"}',
@@ -39,7 +39,7 @@ class NotTest extends BaseTestCase
                         }
                     }
                 }
-            }'
+            }',
         ];
     }
 
@@ -59,7 +59,7 @@ class NotTest extends BaseTestCase
                         }
                     }
                 }
-            }'
+            }',
         ];
         yield [
             '{
@@ -75,7 +75,7 @@ class NotTest extends BaseTestCase
                         }
                     }
                 }
-            }'
+            }',
         ];
         yield "check that a missing, non-required property isn't validated" => [
             '{"y": "foo"}',
@@ -88,7 +88,7 @@ class NotTest extends BaseTestCase
                         }
                     }
                 }
-            }'
+            }',
         ];
     }
 }

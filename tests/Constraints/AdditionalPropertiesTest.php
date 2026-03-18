@@ -37,12 +37,12 @@ class AdditionalPropertiesTest extends BaseTestCase
                         'constraint' => [
                             'name' => 'additionalProp',
                             'params' => [
-                                'property' => 'additionalProp'
-                            ]
+                                'property' => 'additionalProp',
+                            ],
                         ],
-                        'context' => Validator::ERROR_DOCUMENT_VALIDATION
-                    ]
-                ]
+                        'context' => Validator::ERROR_DOCUMENT_VALIDATION,
+                    ],
+                ],
             ];
         yield [
                 '{
@@ -55,7 +55,7 @@ class AdditionalPropertiesTest extends BaseTestCase
                     "prop":{"type":"string"}
                   },
                   "additionalProperties": false
-                }'
+                }',
             ];
         yield [
                 '{
@@ -68,7 +68,7 @@ class AdditionalPropertiesTest extends BaseTestCase
                     "prop":{"type":"string"}
                   },
                   "additionalProperties": {"type":"string"}
-                }'
+                }',
             ];
         yield [
                 '{
@@ -81,7 +81,7 @@ class AdditionalPropertiesTest extends BaseTestCase
                     "prop":{"type":"string"}
                   },
                   "additionalProperties": {"type":"string"}
-                }'
+                }',
             ];
         yield [
                 '{
@@ -93,7 +93,7 @@ class AdditionalPropertiesTest extends BaseTestCase
                   "additionalProperties": {
                     "type": "boolean"
                   }
-                }'
+                }',
             ];
         yield [
                 '{
@@ -103,7 +103,7 @@ class AdditionalPropertiesTest extends BaseTestCase
                 '{
                   "type": "object",
                   "additionalProperties": false
-                }'
+                }',
             ];
     }
 
@@ -119,7 +119,7 @@ class AdditionalPropertiesTest extends BaseTestCase
                   "properties":{
                     "prop":{"type":"string"}
                   }
-                }'
+                }',
             ];
         yield [
                 '{
@@ -131,7 +131,7 @@ class AdditionalPropertiesTest extends BaseTestCase
                   "properties":{
                     "prop":{"type":"string"}
                   }
-                }'
+                }',
         ];
         yield [
                 '{
@@ -144,7 +144,7 @@ class AdditionalPropertiesTest extends BaseTestCase
                     "prop":{"type":"string"}
                   },
                   "additionalProperties": {"type":"string"}
-                }'
+                }',
         ];
         yield [
                 '{
@@ -157,7 +157,7 @@ class AdditionalPropertiesTest extends BaseTestCase
                     "prop":{"type":"string"}
                   },
                   "additionalProperties": true
-                }'
+                }',
         ];
         yield [
                 '{
@@ -169,7 +169,7 @@ class AdditionalPropertiesTest extends BaseTestCase
                   "additionalProperties": {
                     "type": "string"
                   }
-                }'
+                }',
         ];
         yield [
                 '{
@@ -179,7 +179,7 @@ class AdditionalPropertiesTest extends BaseTestCase
                 '{
                   "type": "object",
                   "additionalProperties": true
-                }'
+                }',
         ];
         yield 'additional property casted into int when actually is numeric string (#784)' => [
                 '{
@@ -197,7 +197,7 @@ class AdditionalPropertiesTest extends BaseTestCase
                             }
                         }
                     }
-                }'
+                }',
             ];
     }
 }

@@ -25,7 +25,7 @@ class UriResolverTest extends TestCase
             [
                 'scheme'    => 'http',
                 'authority' => 'example.org',
-                'path'      => '/path/to/file.json'
+                'path'      => '/path/to/file.json',
             ],
             $this->resolver->parse('http://example.org/path/to/file.json')
         );
@@ -39,7 +39,7 @@ class UriResolverTest extends TestCase
                 'authority' => 'example.org',
                 'path'      => '/path/to/file.json',
                 'query'     => '',
-                'fragment'  => 'foo'
+                'fragment'  => 'foo',
             ],
             $this->resolver->parse('http://example.org/path/to/file.json#foo')
         );
@@ -199,7 +199,7 @@ class UriResolverTest extends TestCase
             'authority' => 'user:password@authority',
             'path' => '/path',
             'query' => 'query',
-            'fragment' => 'fragment'
+            'fragment' => 'fragment',
         ], $split);
 
         // check that the recombined URI matches the original input

@@ -16,7 +16,7 @@ class Draft4Test extends BaseDraftTestCase
     {
         return [
             realpath(__DIR__ . self::RELATIVE_TESTS_ROOT . '/draft4'),
-            realpath(__DIR__ . self::RELATIVE_TESTS_ROOT . '/draft4/optional')
+            realpath(__DIR__ . self::RELATIVE_TESTS_ROOT . '/draft4/optional'),
         ];
     }
 
@@ -27,7 +27,7 @@ class Draft4Test extends BaseDraftTestCase
             'ref.json / Location-independent identifier with base URI change in subschema / mismatch',
             'ref.json / id must be resolved against nearest parent, not just immediate parent / non-number is invalid',
             'refRemote.json / Location-independent identifier in remote ref / string is invalid',
-            'refRemote.json / base URI change - change folder / string is invalid'
+            'refRemote.json / base URI change - change folder / string is invalid',
         ];
 
         foreach (parent::getInvalidTests() as $name => $testcase) {
@@ -106,7 +106,7 @@ class Draft4Test extends BaseDraftTestCase
             'float-overflow.json',
             'zeroTerminatedFloats.json',
             // Required
-            'not.json' // only one test case failing
+            'not.json', // only one test case failing
         ];
     }
 }

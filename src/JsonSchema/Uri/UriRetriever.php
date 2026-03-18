@@ -31,7 +31,7 @@ class UriRetriever implements BaseUriRetrieverInterface
      */
     protected $translationMap = [
         // use local copies of the spec schemas
-        '|^https?://json-schema.org/draft-(0[3467])/schema#?|' => 'package://dist/schema/json-schema-draft-$1.json'
+        '|^https?://json-schema.org/draft-(0[3467])/schema#?|' => 'package://dist/schema/json-schema-draft-$1.json',
     ];
 
     /**
@@ -39,7 +39,7 @@ class UriRetriever implements BaseUriRetrieverInterface
      */
     protected $allowedInvalidContentTypeEndpoints = [
         'http://json-schema.org/',
-        'https://json-schema.org/'
+        'https://json-schema.org/',
     ];
 
     /**
@@ -247,7 +247,7 @@ class UriRetriever implements BaseUriRetrieverInterface
             $components =  [
                 'scheme'    => $match[2],
                 'authority' => $match[4],
-                'path'      => $match[5]
+                'path'      => $match[5],
             ];
         }
 

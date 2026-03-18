@@ -32,11 +32,11 @@ class MinItemsMaxItemsTest extends BaseTestCase
                     'name' => 'minItems',
                     'params' => [
                         'minItems' => 2,
-                        'found' => 1
-                    ]
+                        'found' => 1,
+                    ],
                 ],
-                'context' => 1
-            ]]
+                'context' => 1,
+            ]],
         ];
         yield 'Input violating maxItems constraint' => [
             'input' => '{
@@ -57,11 +57,11 @@ class MinItemsMaxItemsTest extends BaseTestCase
                     'name' => 'maxItems',
                     'params' => [
                         'maxItems' => 4,
-                        'found' => 5
-                    ]
+                        'found' => 5,
+                    ],
                 ],
-                'context' => 1
-            ]]
+                'context' => 1,
+            ]],
         ];
     }
 
@@ -76,7 +76,7 @@ class MinItemsMaxItemsTest extends BaseTestCase
               "properties":{
                 "value":{"type":"array","minItems":2,"maxItems":4}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -87,7 +87,7 @@ class MinItemsMaxItemsTest extends BaseTestCase
               "properties":{
                 "value":{"type":"array","minItems":2,"maxItems":4}
               }
-            }'
+            }',
         ];
     }
 }

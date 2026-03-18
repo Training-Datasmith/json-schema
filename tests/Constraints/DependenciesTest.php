@@ -19,19 +19,19 @@ class DependenciesTest extends BaseTestCase
             '{"bar": 1}',
             '{
                 "dependencies": {"bar": "foo"}
-            }'
+            }',
         ];
         yield [
             '{"bar": 1}',
             '{
                 "dependencies": {"bar": ["foo"]}
-            }'
+            }',
         ];
         yield [
             '{"bar": 1, "foo": 1}',
             '{
                 "dependencies": {"bar": ["foo", "baz"]}
-            }'
+            }',
         ];
         yield [
             '{"bar": 1, "foo": 1}',
@@ -41,7 +41,7 @@ class DependenciesTest extends BaseTestCase
                         "foo": {"type": "string"}
                     }
                 }}
-            }'
+            }',
         ];
         yield [
             '{"bar": 1}',
@@ -51,7 +51,7 @@ class DependenciesTest extends BaseTestCase
                         "foo": {"type": "integer", "required": true}
                     }
                 }}
-            }'
+            }',
         ];
         yield [
             '{"bar": 1}',
@@ -62,7 +62,7 @@ class DependenciesTest extends BaseTestCase
                     },
                     "required": ["foo"]
                 }}
-            }'
+            }',
         ];
         yield [
             '{"bar": true, "foo": "ick"}',
@@ -73,7 +73,7 @@ class DependenciesTest extends BaseTestCase
                         "foo": {"type": "integer"}
                     }
                 }}
-            }'
+            }',
         ];
     }
 
@@ -83,43 +83,43 @@ class DependenciesTest extends BaseTestCase
             '{}',
             '{
                 "dependencies": {"bar": "foo"}
-            }'
+            }',
         ];
         yield [
             '{"foo": 1}',
             '{
                 "dependencies": {"bar": "foo"}
-            }'
+            }',
         ];
         yield [
             '"foo"',
             '{
                 "dependencies": {"bar": "foo"}
-            }'
+            }',
         ];
         yield [
             '{"bar": 1, "foo": 1}',
             '{
                 "dependencies": {"bar": "foo"}
-            }'
+            }',
         ];
         yield [
             '{"bar": 1, "foo": 1, "baz": 1}',
             '{
                 "dependencies": {"bar": ["foo", "baz"]}
-            }'
+            }',
         ];
         yield [
             '{}',
             '{
                 "dependencies": {"bar": ["foo", "baz"]}
-            }'
+            }',
         ];
         yield [
             '{"foo": 1, "baz": 1}',
             '{
                 "dependencies": {"bar": ["foo", "baz"]}
-            }'
+            }',
         ];
         yield [
             '{"bar": 1}',
@@ -129,7 +129,7 @@ class DependenciesTest extends BaseTestCase
                         "foo": {"type": "integer"}
                     }
                 }}
-            }'
+            }',
         ];
         yield [
             '{"bar": 1, "foo": 1}',
@@ -140,7 +140,7 @@ class DependenciesTest extends BaseTestCase
                         "foo": {"type": "integer"}
                     }
                 }}
-            }'
+            }',
         ];
     }
 }

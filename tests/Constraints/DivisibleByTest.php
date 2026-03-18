@@ -18,7 +18,7 @@ class DivisibleByTest extends BaseTestCase
               "properties":{
                 "value":{"type":"number","divisibleBy":3}
               }
-            }'
+            }',
         ];
         yield [
             '{"value": 35}',
@@ -27,7 +27,7 @@ class DivisibleByTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "integer", "divisibleBy": 1.5}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": 0.00751}',
@@ -36,7 +36,7 @@ class DivisibleByTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "number", "divisibleBy": 0.0001}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": 7}',
@@ -45,7 +45,7 @@ class DivisibleByTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "integer", "divisibleBy": 2}
                 }
-            }'
+            }',
         ];
     }
 
@@ -58,7 +58,7 @@ class DivisibleByTest extends BaseTestCase
               "properties":{
                 "value":{"type":"number","divisibleBy":3}
               }
-            }'
+            }',
         ];
         yield [
             '{"value": 4.5}',
@@ -67,7 +67,7 @@ class DivisibleByTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "number", "divisibleBy": 1.5}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": 0.0075}',
@@ -75,7 +75,7 @@ class DivisibleByTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "number", "divisibleBy": 0.0001}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": 1}',
@@ -83,7 +83,7 @@ class DivisibleByTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "number", "divisibleBy": 0.02}
                 }
-            }'
+            }',
         ];
     }
 }

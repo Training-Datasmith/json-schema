@@ -67,7 +67,8 @@ class TypeTest extends TestCase
 
         $messageKey = 'message';
         $this->assertArrayHasKey(
-            $messageKey, $actualError,
+            $messageKey,
+            $actualError,
             sprintf('Failed to assert that Type error has a message key %s.', var_export($messageKey, true))
         );
 

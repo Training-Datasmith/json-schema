@@ -20,7 +20,7 @@ class MinimumMaximumTest extends BaseTestCase
               "properties":{
                 "value":{"type":"integer","minimum":4}
               }
-            }'
+            }',
         ];
         yield [
             '{"value": 3}',
@@ -29,7 +29,7 @@ class MinimumMaximumTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "integer", "minimum": 3, "exclusiveMinimum": true}
                 }
-            }'
+            }',
         ];
         yield [
             '{
@@ -40,7 +40,7 @@ class MinimumMaximumTest extends BaseTestCase
               "properties":{
                 "value":{"type":"integer","maximum":8}
               }
-            }'
+            }',
         ];
         yield [
             '{"value": 8}',
@@ -49,7 +49,7 @@ class MinimumMaximumTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "integer", "maximum": 8, "exclusiveMaximum": true}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": 4}',
@@ -58,7 +58,7 @@ class MinimumMaximumTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "integer", "exclusiveMinimum": true}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": 4}',
@@ -67,7 +67,7 @@ class MinimumMaximumTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "integer", "exclusiveMaximum": true}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": 4}',
@@ -76,7 +76,7 @@ class MinimumMaximumTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "integer", "minimum": 5, "exclusiveMinimum": false}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": 4}',
@@ -84,7 +84,7 @@ class MinimumMaximumTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "integer", "maximum": 3, "exclusiveMaximum": false}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": 0.00}',
@@ -92,7 +92,7 @@ class MinimumMaximumTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "number", "minimum": 0, "exclusiveMinimum": true}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": 0.00}',
@@ -100,7 +100,7 @@ class MinimumMaximumTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "number", "maximum": 0, "exclusiveMaximum": true}
                 }
-            }'
+            }',
         ];
     }
 
@@ -115,7 +115,7 @@ class MinimumMaximumTest extends BaseTestCase
               "properties":{
                 "value":{"type":"integer","minimum":4}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -126,7 +126,7 @@ class MinimumMaximumTest extends BaseTestCase
               "properties":{
                 "value":{"type":"integer","maximum":8}
               }
-            }'
+            }',
         ];
         yield [
             '{"value": 6}',
@@ -135,7 +135,7 @@ class MinimumMaximumTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "integer", "minimum": 6, "exclusiveMinimum": false}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": 6}',
@@ -144,7 +144,7 @@ class MinimumMaximumTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "integer", "maximum": 6, "exclusiveMaximum": false}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": 6}',
@@ -153,7 +153,7 @@ class MinimumMaximumTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "integer", "minimum": 6}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": 6}',
@@ -162,7 +162,7 @@ class MinimumMaximumTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "integer", "maximum": 6}
                 }
-            }'
+            }',
         ];
     }
 }

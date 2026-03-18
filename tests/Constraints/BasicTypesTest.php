@@ -25,7 +25,7 @@ class BasicTypesTest extends BaseTestCase
                 "string":{"type":"string"}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{
@@ -37,7 +37,7 @@ class BasicTypesTest extends BaseTestCase
                 "number":{"type":"number"}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{
@@ -49,7 +49,7 @@ class BasicTypesTest extends BaseTestCase
                 "integer":{"type":"integer"}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{
@@ -61,7 +61,7 @@ class BasicTypesTest extends BaseTestCase
                 "boolean":{"type":"boolean"}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{
@@ -73,7 +73,7 @@ class BasicTypesTest extends BaseTestCase
                 "object":{"type":"object"}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{
@@ -85,7 +85,7 @@ class BasicTypesTest extends BaseTestCase
                 "array":{"type":"array"}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{
@@ -97,7 +97,7 @@ class BasicTypesTest extends BaseTestCase
                 "null":{"type":"null"}
               },
               "additionalProperties":false
-            }'
+            }',
             ];
     }
 
@@ -139,7 +139,7 @@ class BasicTypesTest extends BaseTestCase
                 "any6": {"type":"any"}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
     }
 }

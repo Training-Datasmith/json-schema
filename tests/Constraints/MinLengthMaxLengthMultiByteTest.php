@@ -27,7 +27,7 @@ class MinLengthMaxLengthMultiByteTest extends BaseTestCase
               "properties":{
                 "value":{"type":"string","minLength":2,"maxLength":4}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -38,7 +38,7 @@ class MinLengthMaxLengthMultiByteTest extends BaseTestCase
               "properties":{
                 "value":{"type":"string","minLength":2,"maxLength":4}
               }
-            }'
+            }',
         ];
     }
 
@@ -53,7 +53,7 @@ class MinLengthMaxLengthMultiByteTest extends BaseTestCase
               "properties":{
                 "value":{"type":"string","minLength":2,"maxLength":4}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -64,7 +64,7 @@ class MinLengthMaxLengthMultiByteTest extends BaseTestCase
               "properties":{
                 "value":{"type":"string","minLength":2,"maxLength":4}
               }
-            }'
+            }',
         ];
     }
 }

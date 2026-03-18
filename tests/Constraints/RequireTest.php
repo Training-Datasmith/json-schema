@@ -21,7 +21,7 @@ class RequireTest extends BaseTestCase
                 "state":{"type":"string","requires":"city"},
                 "city":{"type":"string"}
               }
-            }'
+            }',
         ];
     }
 
@@ -38,7 +38,7 @@ class RequireTest extends BaseTestCase
                 "state":{"type":"string","requires":"city"},
                 "city":{"type":"string"}
               }
-            }'
+            }',
         ];
     }
 }

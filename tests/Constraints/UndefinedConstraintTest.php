@@ -55,7 +55,7 @@ class UndefinedConstraintTest extends BaseTestCase
                     }
                 }
             }',
-            'checkMode' => Constraint::CHECK_MODE_COERCE_TYPES
+            'checkMode' => Constraint::CHECK_MODE_COERCE_TYPES,
         ];
         yield 'oneOf with apply defaults should not affect value passed to each sub schema (#510)' => [
             'input' => '{"foo": {"name": "bar"}}',
@@ -99,7 +99,7 @@ class UndefinedConstraintTest extends BaseTestCase
                     }
                 ]
             }',
-            'checkMode' => Constraint::CHECK_MODE_APPLY_DEFAULTS
+            'checkMode' => Constraint::CHECK_MODE_APPLY_DEFAULTS,
         ];
         yield 'anyOf with apply defaults should not affect value passed to each sub schema (#711)' => [
             'input' => '{ "b": 2 }',
@@ -135,7 +135,7 @@ class UndefinedConstraintTest extends BaseTestCase
                 }
               ]
             }',
-            'checkMode' => Constraint::CHECK_MODE_APPLY_DEFAULTS
+            'checkMode' => Constraint::CHECK_MODE_APPLY_DEFAULTS,
         ];
     }
 }

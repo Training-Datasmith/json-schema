@@ -20,7 +20,7 @@ class MinLengthMaxLengthTest extends BaseTestCase
               "properties":{
                 "value":{"type":"string","minLength":2,"maxLength":4}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -31,7 +31,7 @@ class MinLengthMaxLengthTest extends BaseTestCase
               "properties":{
                 "value":{"type":"string","minLength":2,"maxLength":4}
               }
-            }'
+            }',
         ];
     }
 
@@ -46,7 +46,7 @@ class MinLengthMaxLengthTest extends BaseTestCase
               "properties":{
                 "value":{"type":"string","minLength":2,"maxLength":4}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -57,7 +57,7 @@ class MinLengthMaxLengthTest extends BaseTestCase
               "properties":{
                 "value":{"type":"string","minLength":2,"maxLength":4}
               }
-            }'
+            }',
         ];
     }
 }

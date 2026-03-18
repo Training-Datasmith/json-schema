@@ -24,7 +24,7 @@ class SchemaValidationTest extends TestCase
                             "required": true
                         }
                     }
-                }'
+                }',
             ],
             [// invalid v4 schema (uses v3 required), use default spec instead of specifying $schema
                 '{
@@ -34,8 +34,8 @@ class SchemaValidationTest extends TestCase
                             "required": true
                         }
                     }
-                }'
-            ]
+                }',
+            ],
         ];
     }
 
@@ -51,8 +51,8 @@ class SchemaValidationTest extends TestCase
                         }
                     },
                     "required": ["propertyOne"]
-                }'
-            ]
+                }',
+            ],
         ];
     }
 

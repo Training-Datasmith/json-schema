@@ -139,21 +139,22 @@ EOF;
 EOF;
 
         return [
-            [$childSchema, $parentSchema]
+            [$childSchema, $parentSchema],
         ];
     }
 
     public function testResolvePointerNoFragment(): void
     {
         $schema = (object) [
-            'title' => 'schema'
+            'title' => 'schema',
         ];
 
         $retriever = new UriRetriever();
         $this->assertEquals(
             $schema,
             $retriever->resolvePointer(
-                $schema, 'http://example.org/schema.json'
+                $schema,
+                'http://example.org/schema.json'
             )
         );
     }
@@ -163,17 +164,18 @@ EOF;
         $schema = (object) [
             'definitions' => (object) [
                 'foo' => (object) [
-                    'title' => 'foo'
-                ]
+                    'title' => 'foo',
+                ],
             ],
-            'title' => 'schema'
+            'title' => 'schema',
         ];
 
         $retriever = new UriRetriever();
         $this->assertEquals(
             $schema->definitions->foo,
             $retriever->resolvePointer(
-                $schema, 'http://example.org/schema.json#/definitions/foo'
+                $schema,
+                'http://example.org/schema.json#/definitions/foo'
             )
         );
     }
@@ -183,17 +185,18 @@ EOF;
         $schema = (object) [
             'definitions' => (object) [
                 'foo' => (object) [
-                    'title' => 'foo'
-                ]
+                    'title' => 'foo',
+                ],
             ],
-            'title' => 'schema'
+            'title' => 'schema',
         ];
 
         $retriever = new UriRetriever();
 
         $this->expectException(ResourceNotFoundException::class);
         $retriever->resolvePointer(
-            $schema, 'http://example.org/schema.json#/definitions/bar'
+            $schema,
+            'http://example.org/schema.json#/definitions/bar'
         );
     }
 
@@ -202,17 +205,18 @@ EOF;
         $schema = (object) [
             'definitions' => (object) [
                 'foo' => [
-                    'title' => 'foo'
-                ]
+                    'title' => 'foo',
+                ],
             ],
-            'title' => 'schema'
+            'title' => 'schema',
         ];
 
         $retriever = new UriRetriever();
 
         $this->expectException(ResourceNotFoundException::class);
         $retriever->resolvePointer(
-            $schema, 'http://example.org/schema.json#/definitions/foo'
+            $schema,
+            'http://example.org/schema.json#/definitions/foo'
         );
     }
 
@@ -222,7 +226,8 @@ EOF;
 
         $this->expectException(UriResolverException::class);
         $retriever->resolve(
-            '../schema.json#', 'http://example.org/schema.json#'
+            '../schema.json#',
+            'http://example.org/schema.json#'
         );
     }
 
@@ -415,7 +420,7 @@ EOF;
             'authority' => 'authority',
             'path' => '/path',
             'query' => '?query',
-            'fragment' => '#fragment'
+            'fragment' => '#fragment',
         ];
         $this->assertEquals('scheme://authority/path?query#fragment', $retriever->generate($components));
     }

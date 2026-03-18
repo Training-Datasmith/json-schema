@@ -158,7 +158,10 @@ abstract class BaseTestCase extends VeryBaseTestCase
         return implode(
             ', ',
             array_map(
-                static function (array $error) { return $error['message']; }, $validator->getErrors()
+                static function (array $error) {
+                    return $error['message'];
+                },
+                $validator->getErrors()
             )
         );
     }

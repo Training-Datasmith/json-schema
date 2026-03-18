@@ -68,7 +68,7 @@ class ErrorBag
             }, array_values($more)))),
             'constraint' => [
                 'name' => $name,
-                'params' => $more
+                'params' => $more,
             ],
             'context' => $this->factory->getErrorContext(),
         ];

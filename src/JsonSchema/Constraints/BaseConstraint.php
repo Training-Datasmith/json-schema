@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace JsonSchema\Constraints;
 
 use const JSON_ERROR_NONE;
+
 use JsonSchema\ConstraintError;
 use JsonSchema\Entity\JsonPointer;
 use JsonSchema\Exception\InvalidArgumentException;
@@ -54,7 +55,7 @@ class BaseConstraint
             }, array_values($more)))),
             'constraint' => [
                 'name' => $name,
-                'params' => $more
+                'params' => $more,
             ],
             'context' => $this->factory->getErrorContext(),
         ];

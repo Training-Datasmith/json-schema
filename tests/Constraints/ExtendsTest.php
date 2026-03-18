@@ -33,7 +33,7 @@ class ExtendsTest extends BaseTestCase
                         "age": {"minimum": 70}
                     }
                 }
-            }'
+            }',
         ];
         yield [
             '{
@@ -53,7 +53,7 @@ class ExtendsTest extends BaseTestCase
                         "age": {"minimum":70}
                     }
                 }
-            }'
+            }',
         ];
         yield [
             '{"foo": 2, "bar": "baz"}',
@@ -66,7 +66,7 @@ class ExtendsTest extends BaseTestCase
                         "foo": {"type": "string", "required": true}
                     }
                 }
-            }'
+            }',
         ];
         yield [
             '{"bar": 2}',
@@ -86,7 +86,7 @@ class ExtendsTest extends BaseTestCase
                         }
                     }
                 ]
-            }'
+            }',
         ];
     }
 
@@ -110,7 +110,7 @@ class ExtendsTest extends BaseTestCase
                         "age": {"minimum": 70}
                     }
                 }
-            }'
+            }',
         ];
         yield [
             '{"foo": "baz", "bar": 2}',
@@ -123,7 +123,7 @@ class ExtendsTest extends BaseTestCase
                         "foo": {"type": "string", "required": true}
                     }
                 }
-            }'
+            }',
         ];
         yield [
             '{"foo": "ick", "bar": 2, "baz": null}',
@@ -143,7 +143,7 @@ class ExtendsTest extends BaseTestCase
                         }
                     }
                 ]
-            }'
+            }',
         ];
     }
 }

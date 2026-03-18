@@ -111,7 +111,7 @@ class RequiredPropertyTest extends BaseTestCase
               "properties":{
                 "number":{"type":"number","required":true}
               }
-            }'
+            }',
         ];
         yield [
             '{}',
@@ -121,7 +121,7 @@ class RequiredPropertyTest extends BaseTestCase
                     "number": {"type": "number"}
                 },
                 "required": ["number"]
-            }'
+            }',
         ];
         yield [
             '{
@@ -138,7 +138,7 @@ class RequiredPropertyTest extends BaseTestCase
                         "required": ["bar"]
                     }
                 }
-            }'
+            }',
         ];
         yield [
             '{
@@ -151,13 +151,13 @@ class RequiredPropertyTest extends BaseTestCase
                     "bar": {"type": "number"}
                 },
                 "required": ["bar"]
-            }'
+            }',
         ];
         yield [
             '{}',
             '{
                 "required": ["foo"]
-            }'
+            }',
         ];
         yield [
             '{
@@ -167,7 +167,7 @@ class RequiredPropertyTest extends BaseTestCase
                 "properties": {
                     "foo": { "required": true }
                 }
-            }'
+            }',
         ];
         yield [
             '{
@@ -178,7 +178,7 @@ class RequiredPropertyTest extends BaseTestCase
               "properties": {
                 "string":{"type":"string", "required": true}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -189,7 +189,7 @@ class RequiredPropertyTest extends BaseTestCase
               "properties": {
                 "number":{"type":"number", "required": true}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -200,7 +200,7 @@ class RequiredPropertyTest extends BaseTestCase
               "properties": {
                 "integer":{"type":"integer", "required": true}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -211,7 +211,7 @@ class RequiredPropertyTest extends BaseTestCase
               "properties": {
                 "boolean":{"type":"boolean", "required": true}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -223,7 +223,7 @@ class RequiredPropertyTest extends BaseTestCase
                 "array":{"type":"array", "required": true}
               }
             }',
-            Constraint::CHECK_MODE_NORMAL
+            Constraint::CHECK_MODE_NORMAL,
         ];
         yield [
             '{
@@ -234,7 +234,7 @@ class RequiredPropertyTest extends BaseTestCase
               "properties": {
                 "null":{"type":"null", "required": true}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -251,7 +251,7 @@ class RequiredPropertyTest extends BaseTestCase
                   "required": ["bar"]
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -267,7 +267,7 @@ class RequiredPropertyTest extends BaseTestCase
                   }
                 }
               }
-            }'
+            }',
         ];
     }
 
@@ -282,7 +282,7 @@ class RequiredPropertyTest extends BaseTestCase
               "properties":{
                 "number":{"type":"number","required":true}
               }
-            }'
+            }',
         ];
         yield [
             '{}',
@@ -291,7 +291,7 @@ class RequiredPropertyTest extends BaseTestCase
               "properties":{
                 "number":{"type":"number"}
               }
-            }'
+            }',
         ];
         yield [
             '{}',
@@ -300,7 +300,7 @@ class RequiredPropertyTest extends BaseTestCase
               "properties":{
                 "number":{"type":"number","required":false}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -311,7 +311,7 @@ class RequiredPropertyTest extends BaseTestCase
               "properties":{
                 "number":{"type":"integer","required":true}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -322,7 +322,7 @@ class RequiredPropertyTest extends BaseTestCase
               "properties":{
                 "is_active":{"type":"boolean","required":true}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -333,7 +333,7 @@ class RequiredPropertyTest extends BaseTestCase
               "properties":{
                 "status":{"type":"null","required":true}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -344,7 +344,7 @@ class RequiredPropertyTest extends BaseTestCase
               "properties":{
                 "users":{"type":"array","required":true}
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -358,7 +358,7 @@ class RequiredPropertyTest extends BaseTestCase
                     "bar": {"type": "number"}
                 },
                 "required": ["bar"]
-            }'
+            }',
         ];
         yield [
             '{
@@ -376,7 +376,7 @@ class RequiredPropertyTest extends BaseTestCase
                     }
                 },
                 "required": ["foo"]
-            }'
+            }',
         ];
         yield [
             '{
@@ -387,7 +387,7 @@ class RequiredPropertyTest extends BaseTestCase
                 "properties": {
                     "foo": { "required": true }
                 }
-            }'
+            }',
         ];
         yield [
             '{
@@ -404,7 +404,7 @@ class RequiredPropertyTest extends BaseTestCase
                   "required": ["bar"]
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -420,7 +420,7 @@ class RequiredPropertyTest extends BaseTestCase
                   }
                 }
               }
-            }'
+            }',
         ];
     }
 }

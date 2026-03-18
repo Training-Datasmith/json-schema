@@ -73,7 +73,7 @@ class TypeConstraint extends Constraint
             }
             $this->addError(ConstraintError::TYPE(), $path, [
                     'found' => gettype($value),
-                    'expected' => $this->implodeWith($wording, ', ', 'or')
+                    'expected' => $this->implodeWith($wording, ', ', 'or'),
             ]);
         }
     }
@@ -156,7 +156,8 @@ class TypeConstraint extends Constraint
                 sprintf(
                     'No wording for %s available, expected wordings are: [%s]',
                     var_export($type, true),
-                    implode(', ', array_filter(self::$wording)))
+                    implode(', ', array_filter(self::$wording))
+                )
             );
         }
     }

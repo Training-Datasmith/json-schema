@@ -22,7 +22,7 @@ class RefTest extends TestCase
                     }
                 }',
                 '{"propertyOne": "not an integer"}',
-                false
+                false,
             ],
             // #1 check that sibling properties of $ref are ignored during validation
             [
@@ -38,7 +38,7 @@ class RefTest extends TestCase
                     }
                 }',
                 '{"propertyOne": 10}',
-                true
+                true,
             ],
             // #2 infinite-loop / unresolveable circular reference
             [
@@ -51,8 +51,8 @@ class RefTest extends TestCase
                 }',
                 '{"propertyOne": 5}',
                 true,
-                \JsonSchema\Exception\UnresolvableJsonPointerException::class
-            ]
+                \JsonSchema\Exception\UnresolvableJsonPointerException::class,
+            ],
         ];
     }
 

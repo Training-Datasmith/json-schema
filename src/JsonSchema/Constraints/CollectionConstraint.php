@@ -111,7 +111,7 @@ class CollectionConstraint extends Constraint
                                 [
                                     'item' => $i,
                                     'property' => $k,
-                                    'additionalItems' => $schema->additionalItems
+                                    'additionalItems' => $schema->additionalItems,
                                 ]
                             );
                         }

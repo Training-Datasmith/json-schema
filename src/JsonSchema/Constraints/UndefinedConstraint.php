@@ -130,8 +130,9 @@ class UndefinedConstraint extends Constraint
                     if (!$this->getTypeCheck()->propertyExists($value, $required)) {
                         $this->addError(
                             ConstraintError::REQUIRED(),
-                            $this->incrementPath($path, $required), [
-                                'property' => $required
+                            $this->incrementPath($path, $required),
+                            [
+                                'property' => $required,
                             ]
                         );
                     }
@@ -396,7 +397,7 @@ class UndefinedConstraint extends Constraint
                     if (!$this->getTypeCheck()->propertyExists($value, $dependency)) {
                         $this->addError(ConstraintError::DEPENDENCIES(), $path, [
                             'key' => $key,
-                            'dependency' => $dependency
+                            'dependency' => $dependency,
                         ]);
                     }
                 } elseif (is_array($dependency)) {
@@ -405,7 +406,7 @@ class UndefinedConstraint extends Constraint
                         if (!$this->getTypeCheck()->propertyExists($value, $d)) {
                             $this->addError(ConstraintError::DEPENDENCIES(), $path, [
                                 'key' => $key,
-                                'dependency' => $dependency
+                                'dependency' => $dependency,
                             ]);
                         }
                     }

@@ -22,7 +22,7 @@ class UnionTypesTest extends BaseTestCase
                 "stringOrNumber":{"type":["string","number"]},
                 "booleanOrNull":{"type":["boolean","null"]}
               }
-            }'
+            }',
         ];
     }
 
@@ -39,7 +39,7 @@ class UnionTypesTest extends BaseTestCase
                 "stringOrNumber":{"type":["string","number"]},
                 "booleanOrNull":{"type":["boolean","null"]}
               }
-            }'
+            }',
         ];
     }
 }

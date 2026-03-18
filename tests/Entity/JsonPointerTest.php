@@ -34,42 +34,42 @@ class JsonPointerTest extends TestCase
             'expectedFileName'             => '',
             'expectedPropertyPaths'        => ['definitions', 'date'],
             'expectedPropertyPathAsString' => '#/definitions/date',
-            'expectedToString'             => '#/definitions/date'
+            'expectedToString'             => '#/definitions/date',
         ];
         yield 'testDataSet_02' => [
             'testValue'                    => 'https://www.example.com/definitions.json#/definitions/date',
             'expectedFileName'             => 'https://www.example.com/definitions.json',
             'expectedPropertyPaths'        => ['definitions', 'date'],
             'expectedPropertyPathAsString' => '#/definitions/date',
-            'expectedToString'             => 'https://www.example.com/definitions.json#/definitions/date'
+            'expectedToString'             => 'https://www.example.com/definitions.json#/definitions/date',
         ];
         yield 'testDataSet_03' => [
             'testValue'                    => '/tmp/schema.json#definitions/common/date/',
             'expectedFileName'             => '/tmp/schema.json',
             'expectedPropertyPaths'        => ['definitions', 'common', 'date'],
             'expectedPropertyPathAsString' => '#/definitions/common/date',
-            'expectedToString'             => '/tmp/schema.json#/definitions/common/date'
+            'expectedToString'             => '/tmp/schema.json#/definitions/common/date',
         ];
         yield 'testDataSet_04' => [
             'testValue'                    => './definitions.json#',
             'expectedFileName'             => './definitions.json',
             'expectedPropertyPaths'        => [],
             'expectedPropertyPathAsString' => '#',
-            'expectedToString'             => './definitions.json#'
+            'expectedToString'             => './definitions.json#',
         ];
         yield 'testDataSet_05' => [
             'testValue'                    => '/schema.json#~0definitions~1general/%custom%25',
             'expectedFileName'             => '/schema.json',
             'expectedPropertyPaths'        => ['~definitions/general', '%custom%'],
             'expectedPropertyPathAsString' => '#/~0definitions~1general/%25custom%25',
-            'expectedToString'             => '/schema.json#/~0definitions~1general/%25custom%25'
+            'expectedToString'             => '/schema.json#/~0definitions~1general/%25custom%25',
         ];
         yield 'testDataSet_06' => [
             'testValue'                    => '#/items/0',
             'expectedFileName'             => '',
             'expectedPropertyPaths'        => ['items', '0'],
             'expectedPropertyPathAsString' => '#/items/0',
-            'expectedToString'             => '#/items/0'
+            'expectedToString'             => '#/items/0',
         ];
     }
 

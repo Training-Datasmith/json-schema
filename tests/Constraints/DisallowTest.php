@@ -32,7 +32,7 @@ class DisallowTest extends BaseTestCase
                   "disallow":{"type":"string","pattern":"xpto"}
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -46,7 +46,7 @@ class DisallowTest extends BaseTestCase
                   "disallow":{"type":"null"}
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{"value": 1}',
@@ -55,7 +55,7 @@ class DisallowTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "any", "disallow": "integer"}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": true}',
@@ -64,7 +64,7 @@ class DisallowTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "any", "disallow": ["integer", "boolean"]}
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": "foo"}',
@@ -82,7 +82,7 @@ class DisallowTest extends BaseTestCase
                             }]
                     }
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": {"foo": "bar"}}',
@@ -100,7 +100,7 @@ class DisallowTest extends BaseTestCase
                             }]
                     }
                 }
-            }'
+            }',
         ];
     }
 
@@ -118,7 +118,7 @@ class DisallowTest extends BaseTestCase
                   "disallow":{"type":"string","pattern":"^xpto"}
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{
@@ -132,7 +132,7 @@ class DisallowTest extends BaseTestCase
                   "disallow":{"type":"null"}
                 }
               }
-            }'
+            }',
         ];
         yield [
             '{"value": {"foo": 1}}',
@@ -150,7 +150,7 @@ class DisallowTest extends BaseTestCase
                             }]
                     }
                 }
-            }'
+            }',
         ];
         yield [
             '{"value": true}',
@@ -159,7 +159,7 @@ class DisallowTest extends BaseTestCase
                 "properties": {
                     "value": {"type": "any", "disallow": "string"}
                 }
-            }'
+            }',
         ];
     }
 }

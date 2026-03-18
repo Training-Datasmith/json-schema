@@ -252,7 +252,7 @@ class FormatTest extends BaseTestCase
                         "pattern": "[0-9]+"
                     }
                 }
-            }'
+            }',
         ];
     }
 
@@ -269,7 +269,7 @@ class FormatTest extends BaseTestCase
                         "pattern": "[0-9]+"
                     }
                 }
-            }'
+            }',
         ];
         yield [
             '{ "color": "blueberry" }',
@@ -281,7 +281,7 @@ class FormatTest extends BaseTestCase
                         "format": "color"
                     }
                 }
-            }'
+            }',
         ];
     }
 }

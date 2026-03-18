@@ -16,7 +16,7 @@ class PatternPropertiesTest extends BaseTestCase
                 'someobject' => [
                     'foobar' => 'foo',
                     'barfoo' => 'bar',
-                ]
+                ],
             ]),
             json_encode([
                 'type' => 'object',
@@ -28,10 +28,10 @@ class PatternPropertiesTest extends BaseTestCase
                             'barfoo' => [
                                 'type' => 'string',
                             ],
-                        ]
-                    ]
-                ]
-            ])
+                        ],
+                    ],
+                ],
+            ]),
         ];
         yield 'Does not match pattern' => [
             json_encode([
@@ -41,11 +41,11 @@ class PatternPropertiesTest extends BaseTestCase
                 'type' => 'object',
                 'patternProperties' => [
                     '^[a-z]+_(jp|de)$' => [
-                        'type' => ['boolean']
-                    ]
+                        'type' => ['boolean'],
+                    ],
                 ],
-                'additionalProperties' => false
-            ])
+                'additionalProperties' => false,
+            ]),
         ];
         yield 'Does not match pattern with unicode' => [
             json_encode([
@@ -55,11 +55,11 @@ class PatternPropertiesTest extends BaseTestCase
                 'type' => 'object',
                 'patternProperties' => [
                     '^[\\x{0080}-\\x{006FFF}]+$' => [
-                        'type' => ['boolean']
-                    ]
+                        'type' => ['boolean'],
+                    ],
                 ],
-                'additionalProperties' => false
-            ])
+                'additionalProperties' => false,
+            ]),
         ];
         yield 'An invalid regular expression pattern' => [
             json_encode([
@@ -69,11 +69,11 @@ class PatternPropertiesTest extends BaseTestCase
                 'type' => 'object',
                 'patternProperties' => [
                     '^[a-z+_jp|de)$' => [
-                        'type' => ['boolean']
-                    ]
+                        'type' => ['boolean'],
+                    ],
                 ],
-                'additionalProperties' => false
-            ])
+                'additionalProperties' => false,
+            ]),
         ];
     }
 
@@ -89,23 +89,23 @@ class PatternPropertiesTest extends BaseTestCase
                     'foobar' => 1234,
                 ],
                 '/products' => [
-                    'get' => []
+                    'get' => [],
                 ],
                 '#products' => [
-                    'get' => []
+                    'get' => [],
                 ],
                 '+products' => [
-                    'get' => []
+                    'get' => [],
                 ],
                 '~products' => [
-                    'get' => []
+                    'get' => [],
                 ],
                 '*products' => [
-                    'get' => []
+                    'get' => [],
                 ],
                 '%products' => [
-                    'get' => []
-                ]
+                    'get' => [],
+                ],
             ]),
             json_encode([
                 'type' => 'object',
@@ -127,60 +127,60 @@ class PatternPropertiesTest extends BaseTestCase
                     '^/' => [
                         'type' => 'object',
                         'properties' => [
-                            'get' => ['type' => 'array']
-                        ]
+                            'get' => ['type' => 'array'],
+                        ],
                     ],
                     '^#' => [
                         'type' => 'object',
                         'properties' => [
-                            'get' => ['type' => 'array']
-                        ]
+                            'get' => ['type' => 'array'],
+                        ],
                     ],
                     '^\+' => [
                         'type' => 'object',
                         'properties' => [
-                            'get' => ['type' => 'array']
-                        ]
+                            'get' => ['type' => 'array'],
+                        ],
                     ],
                     '^~' => [
                         'type' => 'object',
                         'properties' => [
-                            'get' => ['type' => 'array']
-                        ]
+                            'get' => ['type' => 'array'],
+                        ],
                     ],
                     '^\*' => [
                         'type' => 'object',
                         'properties' => [
-                            'get' => ['type' => 'array']
-                        ]
+                            'get' => ['type' => 'array'],
+                        ],
                     ],
                     '^%' => [
                         'type' => 'object',
                         'properties' => [
-                            'get' => ['type' => 'array']
-                        ]
-                    ]
-                ]
-            ])
+                            'get' => ['type' => 'array'],
+                        ],
+                    ],
+                ],
+            ]),
         ];
         yield [
             json_encode([
                     'foobar' => true,
                     'regex_us' => 'foo',
-                    'regex_de' => 1234
+                    'regex_de' => 1234,
             ]),
             json_encode([
                     'type' => 'object',
                     'properties' => [
-                        'foobar' => ['type' => 'boolean']
+                        'foobar' => ['type' => 'boolean'],
                     ],
                     'patternProperties' => [
                         '^[a-z]+_(us|de)$' => [
-                            'type' => ['string', 'integer']
-                        ]
+                            'type' => ['string', 'integer'],
+                        ],
                     ],
-                    'additionalProperties' => false
-            ])
+                    'additionalProperties' => false,
+            ]),
         ];
         yield 'Does match pattern with unicode' => [
             json_encode([
@@ -190,11 +190,11 @@ class PatternPropertiesTest extends BaseTestCase
                 'type' => 'object',
                 'patternProperties' => [
                     '^[\\x{0080}-\\x{10FFFF}]+$' => [
-                        'type' => ['string']
-                    ]
+                        'type' => ['string'],
+                    ],
                 ],
-                'additionalProperties' => false
-            ])
+                'additionalProperties' => false,
+            ]),
         ];
     }
 
@@ -209,12 +209,12 @@ class PatternPropertiesTest extends BaseTestCase
             json_encode([
                 'responses' => [
                     '200' => [
-                        'description' => 'OK'
+                        'description' => 'OK',
                     ],
                     '404' => [
-                        'description' => 'Not Found'
-                    ]
-                ]
+                        'description' => 'Not Found',
+                    ],
+                ],
             ]),
             json_encode([
                 'type' => 'object',
@@ -225,13 +225,13 @@ class PatternPropertiesTest extends BaseTestCase
                             '^[0-9]+$' => [
                                 'type' => 'object',
                                 'properties' => [
-                                    'description' => ['type' => 'string']
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ])
+                                    'description' => ['type' => 'string'],
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ]),
         ];
     }
 }

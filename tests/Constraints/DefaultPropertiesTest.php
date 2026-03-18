@@ -29,67 +29,67 @@ class DefaultPropertiesTest extends VeryBaseTestCase
             [// #0 default value in an empty object
                 '{}',
                 '{"properties":{"propertyOne":{"default":"valueOne"}}}',
-                '{"propertyOne":"valueOne"}'
+                '{"propertyOne":"valueOne"}',
             ],
             [// #1 default value for top-level property
                 '{"propertyOne":"valueOne"}',
                 '{"properties":{"propertyTwo":{"default":"valueTwo"}}}',
-                '{"propertyOne":"valueOne","propertyTwo":"valueTwo"}'
+                '{"propertyOne":"valueOne","propertyTwo":"valueTwo"}',
             ],
             [// #2 default value for sub-property
                 '{"propertyOne":{}}',
                 '{"properties":{"propertyOne":{"properties":{"propertyTwo":{"default":"valueTwo"}}}}}',
-                '{"propertyOne":{"propertyTwo":"valueTwo"}}'
+                '{"propertyOne":{"propertyTwo":"valueTwo"}}',
             ],
             [// #3 default value for sub-property with sibling
                 '{"propertyOne":{"propertyTwo":"valueTwo"}}',
                 '{"properties":{"propertyOne":{"properties":{"propertyThree":{"default":"valueThree"}}}}}',
-                '{"propertyOne":{"propertyTwo":"valueTwo","propertyThree":"valueThree"}}'
+                '{"propertyOne":{"propertyTwo":"valueTwo","propertyThree":"valueThree"}}',
             ],
             [// #4 default value for top-level property with type check
                 '{"propertyOne":"valueOne"}',
                 '{"properties":{"propertyTwo":{"default":"valueTwo","type":"string"}}}',
-                '{"propertyOne":"valueOne","propertyTwo":"valueTwo"}'
+                '{"propertyOne":"valueOne","propertyTwo":"valueTwo"}',
             ],
             [// #5 default value for top-level property with v3 required check
                 '{"propertyOne":"valueOne"}',
                 '{"properties":{"propertyTwo":{"default":"valueTwo","required":"true"}}}',
-                '{"propertyOne":"valueOne","propertyTwo":"valueTwo"}'
+                '{"propertyOne":"valueOne","propertyTwo":"valueTwo"}',
             ],
             [// #6 default value for top-level property with v4 required check
                 '{"propertyOne":"valueOne"}',
                 '{"properties":{"propertyTwo":{"default":"valueTwo"}},"required":["propertyTwo"]}',
-                '{"propertyOne":"valueOne","propertyTwo":"valueTwo"}'
+                '{"propertyOne":"valueOne","propertyTwo":"valueTwo"}',
             ],
             [// #7 default value for an already set property
                 '{"propertyOne":"alreadySetValueOne"}',
                 '{"properties":{"propertyOne":{"default":"valueOne"}}}',
-                '{"propertyOne":"alreadySetValueOne"}'
+                '{"propertyOne":"alreadySetValueOne"}',
             ],
             [// #8 default item value for an array
                 '["valueOne"]',
                 '{"type":"array","items":[{},{"type":"string","default":"valueTwo"}]}',
-                '["valueOne","valueTwo"]'
+                '["valueOne","valueTwo"]',
             ],
             [// #9 default item value for an empty array
                 '[]',
                 '{"type":"array","items":[{"type":"string","default":"valueOne"}]}',
-                '["valueOne"]'
+                '["valueOne"]',
             ],
             [// #10 property without a default available
                 '{"propertyOne":"alreadySetValueOne"}',
                 '{"properties":{"propertyOne":{"type":"string"}}}',
-                '{"propertyOne":"alreadySetValueOne"}'
+                '{"propertyOne":"alreadySetValueOne"}',
             ],
             [// #11 default property value is an object
                 '{"propertyOne":"valueOne"}',
                 '{"properties":{"propertyTwo":{"default":{}}}}',
-                '{"propertyOne":"valueOne","propertyTwo":{}}'
+                '{"propertyOne":"valueOne","propertyTwo":{}}',
             ],
             [// #12 default item value is an object
                 '[]',
                 '{"type":"array","items":[{"default":{}}]}',
-                '[{}]'
+                '[{}]',
             ],
             [// #13 only set required values (draft-04)
                 '{}',
@@ -101,7 +101,7 @@ class DefaultPropertiesTest extends VeryBaseTestCase
                     "required": ["propertyTwo"]
                 }',
                 '{"propertyTwo":"valueTwo"}',
-                Constraint::CHECK_MODE_ONLY_REQUIRED_DEFAULTS
+                Constraint::CHECK_MODE_ONLY_REQUIRED_DEFAULTS,
             ],
             [// #14 only set required values (draft-03)
                 '{}',
@@ -112,52 +112,52 @@ class DefaultPropertiesTest extends VeryBaseTestCase
                     }
                 }',
                 '{"propertyTwo":"valueTwo"}',
-                Constraint::CHECK_MODE_ONLY_REQUIRED_DEFAULTS
+                Constraint::CHECK_MODE_ONLY_REQUIRED_DEFAULTS,
             ],
             [// #15 infinite recursion via $ref (object)
                 '{}',
                 '{"properties":{"propertyOne": {"$ref": "#","default": "valueOne"}}, "default": {}}',
-                '{"propertyOne":{}}'
+                '{"propertyOne":{}}',
             ],
             [// #16 infinite recursion via $ref (array)
                 '[]',
                 '{"items":[{"$ref":"#","default":"valueOne"}], "default": []}',
-                '[[]]'
+                '[[]]',
             ],
             [// #17 default top value does not overwrite defined null
                 'null',
                 '{"default":"valueOne"}',
-                'null'
+                'null',
             ],
             [// #18 default property value does not overwrite defined null
                 '{"propertyOne":null}',
                 '{"properties":{"propertyOne":{"default":"valueOne"}}}',
-                '{"propertyOne":null}'
+                '{"propertyOne":null}',
             ],
             [// #19 default value in an object is null
                 '{}',
                 '{"properties":{"propertyOne":{"default":null}}}',
-                '{"propertyOne":null}'
+                '{"propertyOne":null}',
             ],
             [// #20 default value in an array is null
                 '[]',
                 '{"items":[{"default":null}]}',
-                '[null]'
+                '[null]',
             ],
             [// #21 items might be a schema (instead of an array of schema)
                 '[{}]',
                 '{"items":{"properties":{"propertyOne":{"default":"valueOne"}}}}',
-                '[{"propertyOne":"valueOne"}]'
+                '[{"propertyOne":"valueOne"}]',
             ],
             [// #22 if items is not an array, it does not create a new item
                 '[]',
                 '{"items":{"properties":{"propertyOne":{"default":"valueOne"}}}}',
-                '[]'
+                '[]',
             ],
             [// #23 if items is a schema with a default value and minItems is present, fill the array
                 '["a"]',
                 '{"items":{"default":"b"}, "minItems": 3}',
-                '["a","b","b"]'
+                '["a","b","b"]',
             ],
         ];
     }

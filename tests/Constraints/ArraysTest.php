@@ -23,7 +23,7 @@ class ArraysTest extends BaseTestCase
                       "items":{"type":"number"}
                     }
                   }
-                }'
+                }',
             ];
         yield [
                 '{
@@ -38,7 +38,7 @@ class ArraysTest extends BaseTestCase
                       "additionalItems":{"type":"boolean"}
                     }
                   }
-                }'
+                }',
         ];
         yield [
                 '{
@@ -52,7 +52,7 @@ class ArraysTest extends BaseTestCase
                       "items":{"type":["number","boolean"]}
                     }
                   }
-                }'
+                }',
         ];
         yield [
                 '{"data": [1, 2, 3, "foo"]}',
@@ -65,7 +65,7 @@ class ArraysTest extends BaseTestCase
                             "additionalItems": {"type": "integer"}
                         }
                     }
-                }'
+                }',
         ];
         yield 'Test array items.enum where type string fail validation if value(s) is/are not in items.enum' => [
                 '{"data": ["a", "b"]}',
@@ -80,7 +80,7 @@ class ArraysTest extends BaseTestCase
                             }
                         }
                     }
-                }'
+                }',
         ];
         yield 'Test array items.enum where type integer fail validation if value(s) is/are not in items.enum' => [
                 '{"data": [1, 2]}',
@@ -95,7 +95,7 @@ class ArraysTest extends BaseTestCase
                             }
                         }
                     }
-                }'
+                }',
         ];
         yield 'Test array items.enum where type number fail validation if value(s) is/are not in items.enum' => [
                 '{"data": [1.25, 2.25]}',
@@ -110,7 +110,7 @@ class ArraysTest extends BaseTestCase
                             }
                         }
                     }
-                }'
+                }',
         ];
         yield [
                 '{"data": [{"not_a_string_but_object":"string_but_in_object"}]}',
@@ -123,7 +123,7 @@ class ArraysTest extends BaseTestCase
                             "additionalItems": false
                         }
                     }
-                }'
+                }',
             ];
     }
 
@@ -138,7 +138,7 @@ class ArraysTest extends BaseTestCase
                   "properties":{
                     "array":{"type":"array"}
                   }
-                }'
+                }',
         ];
         yield [
                 '{
@@ -153,7 +153,7 @@ class ArraysTest extends BaseTestCase
                       "additionalItems": {"type": "string"}
                     }
                   }
-                }'
+                }',
         ];
         yield [
                 '{"data": [1, 2, 3, 4]}',
@@ -166,7 +166,7 @@ class ArraysTest extends BaseTestCase
                             "additionalItems": {"type": "integer"}
                         }
                     }
-                }'
+                }',
         ];
         yield [
                 '{"data": [1, "foo", false]}',
@@ -178,7 +178,7 @@ class ArraysTest extends BaseTestCase
                             "items": []
                         }
                     }
-                }'
+                }',
         ];
         yield [
                 '{"data": [1, "foo", false]}',
@@ -190,7 +190,7 @@ class ArraysTest extends BaseTestCase
                             "items": {}
                         }
                     }
-                }'
+                }',
         ];
         yield [
                 '{"data": [1, 2, 3, 4, 5]}',
@@ -202,7 +202,7 @@ class ArraysTest extends BaseTestCase
                             "additionalItems": false
                         }
                     }
-                }'
+                }',
         ];
         yield 'test more schema items than array items' => [
                 '{"data": [1, 2]}',
@@ -218,7 +218,7 @@ class ArraysTest extends BaseTestCase
                             ]
                         }
                     }
-                }'
+                }',
         ];
         yield 'Test array items.enum where type string passes validation if value(s) is/are in items.enum' => [
                 '{"data": ["c", "c", "b"]}',
@@ -233,7 +233,7 @@ class ArraysTest extends BaseTestCase
                             }
                         }
                     }
-                }'
+                }',
         ];
         yield 'Test array items.enum where type integer passes validation if value(s) is/are in items.enum' => [
                 '{"data": [1, 1, 2]}',
@@ -248,7 +248,7 @@ class ArraysTest extends BaseTestCase
                             }
                         }
                     }
-                }'
+                }',
         ];
         yield 'Test array items.enum where type number passes validation if value(s) is/are in items.enum' => [
                 '{"data": [1.25, 1.25, 2.25]}',
@@ -263,7 +263,7 @@ class ArraysTest extends BaseTestCase
                             }
                         }
                     }
-                }'
+                }',
         ];
     }
 }

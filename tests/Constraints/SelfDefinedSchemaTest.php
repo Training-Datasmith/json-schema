@@ -33,7 +33,7 @@ class SelfDefinedSchemaTest extends BaseTestCase
                 "age" : 30,
                 "type" : "object"
             }',
-            ''
+            '',
         ];
     }
 
@@ -57,7 +57,7 @@ class SelfDefinedSchemaTest extends BaseTestCase
                 "age" : 30,
                 "type" : "object"
             }',
-            ''
+            '',
         ];
     }
 

@@ -21,7 +21,7 @@ class PatternTest extends BaseTestCase
                 "value":{"type":"string","pattern":"^cat"}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{"value": "abc"}',
@@ -31,7 +31,7 @@ class PatternTest extends BaseTestCase
                     "value": {"type": "string", "pattern": "^a*$"}
                 },
                 "additionalProperties": false
-            }'
+            }',
         ];
         yield [
             '{"value": "Ã¼"}',
@@ -41,7 +41,7 @@ class PatternTest extends BaseTestCase
                     "value": {"type": "string", "pattern": "^ü$"}
                 },
                 "additionalProperties": false
-            }'
+            }',
         ];
     }
 
@@ -57,7 +57,7 @@ class PatternTest extends BaseTestCase
                 "value":{"type":"string","pattern":"tes$"}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{
@@ -69,7 +69,7 @@ class PatternTest extends BaseTestCase
                 "value":{"type":"string","pattern":"cat"}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield [
             '{"value": "aaa"}',
@@ -79,7 +79,7 @@ class PatternTest extends BaseTestCase
                     "value": {"type": "string", "pattern": "^a*$"}
                 },
                 "additionalProperties": false
-            }'
+            }',
         ];
         yield [
             '{"value": "↓æ→"}',
@@ -89,7 +89,7 @@ class PatternTest extends BaseTestCase
                     "value": {"type": "string", "pattern": "^↓æ.$"}
                 },
                 "additionalProperties": false
-            }'
+            }',
         ];
     }
 }

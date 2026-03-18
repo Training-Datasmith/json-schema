@@ -23,7 +23,7 @@ class ConstTest extends BaseTestCase
                 "value":{"type":"string","const":"bar"}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield 'Object with inner integer value' => [
             '{"value":5}',
@@ -33,7 +33,7 @@ class ConstTest extends BaseTestCase
                 "value":{"type":"integer","const":6}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield 'Object with inner boolean value' => [
             '{"value":false}',
@@ -43,7 +43,7 @@ class ConstTest extends BaseTestCase
                 "value":{"type":"boolean","const":true}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield 'Object with inner numerical string value' => [
                 '{
@@ -61,7 +61,7 @@ class ConstTest extends BaseTestCase
                             }
                         }
                     }
-                }'
+                }',
             ];
     }
 
@@ -75,7 +75,7 @@ class ConstTest extends BaseTestCase
                 "value":{"type":"string","const":"bar"}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield 'Boolean(false) value' => [
             '{"value":false}',
@@ -85,7 +85,7 @@ class ConstTest extends BaseTestCase
                 "value":{"type":"boolean","const":false}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield 'Boolean(true) value' => [
             '{"value":true}',
@@ -95,7 +95,7 @@ class ConstTest extends BaseTestCase
                 "value":{"type":"boolean","const":true}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield 'Integer value' => [
             '{"value":5}',
@@ -105,7 +105,7 @@ class ConstTest extends BaseTestCase
                 "value":{"type":"integer","const":5}
               },
               "additionalProperties":false
-            }'
+            }',
         ];
         yield 'Object with inner integer value' => [
                 '{
@@ -123,7 +123,7 @@ class ConstTest extends BaseTestCase
                             }
                         }
                     }
-                }'
+                }',
             ];
     }
 }

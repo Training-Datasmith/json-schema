@@ -18,7 +18,7 @@ class NumberAndIntegerTypesTest extends BaseTestCase
               "properties":{
                 "integer":{"type":"integer"}
               }
-            }'
+            }',
         ];
         yield [
             'input' => '{"integer": 1.001}',
@@ -27,7 +27,7 @@ class NumberAndIntegerTypesTest extends BaseTestCase
                 "properties": {
                     "integer": {"type": "integer"}
                 }
-            }'
+            }',
         ];
         yield [
             'input' => '{"integer": true}',
@@ -36,7 +36,7 @@ class NumberAndIntegerTypesTest extends BaseTestCase
                 "properties": {
                     "integer": {"type": "integer"}
                 }
-            }'
+            }',
         ];
         yield [
             'input' => '{"number": "x"}',
@@ -45,7 +45,7 @@ class NumberAndIntegerTypesTest extends BaseTestCase
                 "properties": {
                     "number": {"type": "number"}
                 }
-            }'
+            }',
         ];
     }
 
@@ -58,7 +58,7 @@ class NumberAndIntegerTypesTest extends BaseTestCase
               "properties":{
                 "integer":{"type":"integer"}
               }
-            }'
+            }',
         ];
         yield [
             'input' => '{ "number": 1.4 }',
@@ -67,7 +67,7 @@ class NumberAndIntegerTypesTest extends BaseTestCase
               "properties":{
                 "number":{"type":"number"}
               }
-            }'
+            }',
         ];
         yield [
             'input' => '{"number": 1e5}',
@@ -76,7 +76,7 @@ class NumberAndIntegerTypesTest extends BaseTestCase
                 "properties": {
                     "number": {"type": "number"}
                 }
-            }'
+            }',
         ];
         yield [
             'input' => '{"number": 1}',
@@ -86,7 +86,7 @@ class NumberAndIntegerTypesTest extends BaseTestCase
                     "number": {"type": "number"}
 
                 }
-            }'
+            }',
         ];
         yield [
             'input' => '{"number": -49.89}',
@@ -98,7 +98,7 @@ class NumberAndIntegerTypesTest extends BaseTestCase
                       "multipleOf": 0.01
                     }
                 }
-            }'
+            }',
         ];
     }
 }
