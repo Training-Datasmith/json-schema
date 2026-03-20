@@ -29,7 +29,7 @@
     "require": {
         "php": "^7.2 || ^8.0",
         "ext-json": "*",
-        "marc-mabe/php-enum":"^4.4"
+        "marc-mabe/php-enum": "^4.4"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "3.3.0",
@@ -46,12 +46,12 @@
     },
     "autoload": {
         "psr-4": {
-            "JsonSchema\\": "src/JsonSchema/"
+            "Json_Schema\\": "src/JsonSchema/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "JsonSchema\\Tests\\": "tests/"
+            "Json_Schema\\Tests\\": "tests/"
         }
     },
     "repositories": [
