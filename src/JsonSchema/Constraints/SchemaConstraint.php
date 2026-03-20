@@ -1,98 +1,87 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the JsonSchema package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Json_Schema\Constraints;
 
-namespace JsonSchema\Constraints;
-
-use JsonSchema\ConstraintError;
-use JsonSchema\DraftIdentifiers;
-use JsonSchema\Entity\JsonPointer;
-use JsonSchema\Exception\InvalidArgumentException;
-use JsonSchema\Exception\InvalidSchemaException;
-use JsonSchema\Exception\RuntimeException;
-use JsonSchema\Validator;
-
+use Json_Schema\Constraint_Error;
+use Json_Schema\Draft_Identifiers;
+use Json_Schema\Entity\Json_Pointer;
+use Json_Schema\Exception\InvalidArgumentException;
+use Json_Schema\Exception\Invalid_Schema_Exception;
+use Json_Schema\Exception\RuntimeException;
+use Json_Schema\Validator;
 /**
  * The SchemaConstraint Constraints, validates an element against a given schema
  *
  * @author Robert Schönthal <seroscho@googlemail.com>
  * @author Bruno Prieto Reis <bruno.p.reis@gmail.com>
  */
-class SchemaConstraint extends Constraint
+class Schema_Constraint extends Constraint
 {
-    private const DEFAULT_SCHEMA_SPEC = DraftIdentifiers::DRAFT_4;
-
+    private const DEFAULT_SCHEMA_SPEC = Draft_Identifiers::DRAFT_4;
     /**
      * {@inheritdoc}
      */
-    public function check(&$element, $schema = null, ?JsonPointer $path = null, $i = null): void
+    public function check(&$element, $schema = null, ?Json_Pointer $path = null, $i = null): void
     {
         if ($schema !== null) {
             // passed schema
-            $validationSchema = $schema;
-        } elseif ($this->getTypeCheck()->propertyExists($element, $this->inlineSchemaProperty)) {
+            $validation_schema = $schema;
+        } elseif ($this->get_type_check()->property_exists($element, $this->inline_schema_property)) {
             // inline schema
-            $validationSchema = $this->getTypeCheck()->propertyGet($element, $this->inlineSchemaProperty);
+            $validation_schema = $this->get_type_check()->property_get($element, $this->inline_schema_property);
         } else {
             throw new InvalidArgumentException('no schema found to verify against');
         }
-
         // cast array schemas to object
-        if (is_array($validationSchema)) {
-            $validationSchema = BaseConstraint::arrayToObjectRecursive($validationSchema);
+        if (is_array($validation_schema)) {
+            $validation_schema = Base_Constraint::array_to_object_recursive($validation_schema);
         }
-
         // validate schema against whatever is defined in $validationSchema->$schema. If no
         // schema is defined, assume self::DEFAULT_SCHEMA_SPEC (currently draft-04).
-        if ($this->factory->getConfig(self::CHECK_MODE_VALIDATE_SCHEMA)) {
-            if (!$this->getTypeCheck()->isObject($validationSchema)) {
+        if ($this->factory->get_config(self::CHECK_MODE_VALIDATE_SCHEMA)) {
+            if (!$this->get_type_check()->is_object($validation_schema)) {
                 throw new RuntimeException('Cannot validate the schema of a non-object');
             }
-            if ($this->getTypeCheck()->propertyExists($validationSchema, '$schema')) {
-                $schemaSpec = $this->getTypeCheck()->propertyGet($validationSchema, '$schema');
+            if ($this->get_type_check()->property_exists($validation_schema, '$schema')) {
+                $schema_spec = $this->get_type_check()->property_get($validation_schema, '$schema');
             } else {
-                $schemaSpec = self::DEFAULT_SCHEMA_SPEC;
+                $schema_spec = self::DEFAULT_SCHEMA_SPEC;
             }
-
             // get the spec schema
-            $schemaStorage = $this->factory->getSchemaStorage();
-            if (!$this->getTypeCheck()->isObject($schemaSpec)) {
-                $schemaSpec = $schemaStorage->getSchema($schemaSpec);
+            $schema_storage = $this->factory->get_schema_storage();
+            if (!$this->get_type_check()->is_object($schema_spec)) {
+                $schema_spec = $schema_storage->get_schema($schema_spec);
             }
-
             // save error count, config & subtract CHECK_MODE_VALIDATE_SCHEMA
-            $initialErrorCount = $this->numErrors();
-            $initialConfig = $this->factory->getConfig();
-            $initialContext = $this->factory->getErrorContext();
-            $this->factory->removeConfig(self::CHECK_MODE_VALIDATE_SCHEMA | self::CHECK_MODE_APPLY_DEFAULTS);
-            $this->factory->addConfig(self::CHECK_MODE_TYPE_CAST);
-            $this->factory->setErrorContext(Validator::ERROR_SCHEMA_VALIDATION);
-
+            $initial_error_count = $this->num_errors();
+            $initial_config = $this->factory->get_config();
+            $initial_context = $this->factory->get_error_context();
+            $this->factory->remove_config(self::CHECK_MODE_VALIDATE_SCHEMA | self::CHECK_MODE_APPLY_DEFAULTS);
+            $this->factory->add_config(self::CHECK_MODE_TYPE_CAST);
+            $this->factory->set_error_context(Validator::ERROR_SCHEMA_VALIDATION);
             // validate schema
             try {
-                $this->check($validationSchema, $schemaSpec);
+                $this->check($validation_schema, $schema_spec);
             } catch (\Exception $e) {
-                if ($this->factory->getConfig(self::CHECK_MODE_EXCEPTIONS)) {
-                    throw new InvalidSchemaException('Schema did not pass validation', 0, $e);
+                if ($this->factory->get_config(self::CHECK_MODE_EXCEPTIONS)) {
+                    throw new Invalid_Schema_Exception('Schema did not pass validation', 0, $e);
                 }
             }
-            if ($this->numErrors() > $initialErrorCount) {
-                $this->addError(ConstraintError::INVALID_SCHEMA(), $path);
+            if ($this->num_errors() > $initial_error_count) {
+                $this->add_error(Constraint_Error::INVALID_SCHEMA(), $path);
             }
-
             // restore the initial config
-            $this->factory->setConfig($initialConfig);
-            $this->factory->setErrorContext($initialContext);
+            $this->factory->set_config($initial_config);
+            $this->factory->set_error_context($initial_context);
         }
-
         // validate element against $validationSchema
-        $this->checkUndefined($element, $validationSchema, $path, $i);
+        $this->check_undefined($element, $validation_schema, $path, $i);
     }
 }

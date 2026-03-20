@@ -1,50 +1,42 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema\Constraints\Drafts\Draft07;
 
-namespace JsonSchema\Constraints\Drafts\Draft07;
-
-use JsonSchema\ConstraintError;
-use JsonSchema\Constraints\ConstraintInterface;
-use JsonSchema\Constraints\Factory;
-use JsonSchema\Entity\ErrorBagProxy;
-use JsonSchema\Entity\JsonPointer;
-
-class TypeConstraint implements ConstraintInterface
+use Json_Schema\Constraint_Error;
+use Json_Schema\Constraints\Constraint_Interface;
+use Json_Schema\Constraints\Factory;
+use Json_Schema\Entity\Error_Bag_Proxy;
+use Json_Schema\Entity\Json_Pointer;
+class Type_Constraint implements Constraint_Interface
 {
-    use ErrorBagProxy;
-
+    use Error_Bag_Proxy;
     public function __construct(?Factory $factory = null)
     {
-        $this->initialiseErrorBag($factory ?: new Factory());
+        $this->initialise_error_bag($factory ?: new Factory());
     }
-
-    public function check(&$value, $schema = null, ?JsonPointer $path = null, $i = null): void
+    public function check(&$value, $schema = null, ?Json_Pointer $path = null, $i = null): void
     {
         if (!property_exists($schema, 'type')) {
             return;
         }
-
-        $schemaTypes = (array) $schema->type;
-        $valueType = strtolower(gettype($value));
+        $schema_types = (array) $schema->type;
+        $value_type = strtolower(gettype($value));
         // All specific number types are a number
-        $valueIsNumber = $valueType === 'double' ||  $valueType === 'integer';
+        $value_is_number = $value_type === 'double' || $value_type === 'integer';
         // A float with zero fractional part is an integer
-        $isInteger = $valueIsNumber && fmod($value, 1.0) === 0.0;
-
-        foreach ($schemaTypes as $type) {
-            if ($valueType === $type) {
+        $is_integer = $value_is_number && fmod($value, 1.0) === 0.0;
+        foreach ($schema_types as $type) {
+            if ($value_type === $type) {
                 return;
             }
-
-            if ($type === 'number' && $valueIsNumber) {
+            if ($type === 'number' && $value_is_number) {
                 return;
             }
-            if ($type === 'integer' && $isInteger) {
+            if ($type === 'integer' && $is_integer) {
                 return;
             }
         }
-
-        $this->addError(ConstraintError::TYPE(), $path, ['found' => $valueType, 'expected' => implode(', ', $schemaTypes)]);
+        $this->add_error(Constraint_Error::TYPE(), $path, ['found' => $value_type, 'expected' => implode(', ', $schema_types)]);
     }
 }

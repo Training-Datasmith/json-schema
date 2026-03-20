@@ -1,66 +1,55 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema\Entity;
 
-namespace JsonSchema\Entity;
-
-use JsonSchema\ConstraintError;
-use JsonSchema\Constraints\Factory;
-
+use Json_Schema\Constraint_Error;
+use Json_Schema\Constraints\Factory;
 /**
  * @phpstan-import-type Error from ErrorBag
  * @phpstan-import-type ErrorList from ErrorBag
  */
-trait ErrorBagProxy
+trait Error_Bag_Proxy
 {
     /** @var ?ErrorBag */
-    protected $errorBag;
-
+    protected $error_bag;
     /** @return ErrorList */
-    public function getErrors(): array
+    public function get_errors(): array
     {
-        return $this->errorBag()->getErrors();
+        return $this->error_bag()->get_errors();
     }
-
     /** @param ErrorList $errors */
-    public function addErrors(array $errors): void
+    public function add_errors(array $errors): void
     {
-        $this->errorBag()->addErrors($errors);
+        $this->error_bag()->add_errors($errors);
     }
-
     /**
      * @param array<string, mixed> $more more array elements to add to the error
      */
-    public function addError(ConstraintError $constraint, ?JsonPointer $path = null, array $more = []): void
+    public function add_error(Constraint_Error $constraint, ?Json_Pointer $path = null, array $more = []): void
     {
-        $this->errorBag()->addError($constraint, $path, $more);
+        $this->error_bag()->add_error($constraint, $path, $more);
     }
-
-    public function isValid(): bool
+    public function is_valid(): bool
     {
-        return $this->errorBag()->getErrors() === [];
+        return $this->error_bag()->get_errors() === [];
     }
-
-    protected function initialiseErrorBag(Factory $factory): ErrorBag
+    protected function initialise_error_bag(Factory $factory): Error_Bag
     {
-        if (is_null($this->errorBag)) {
-            $this->errorBag = new ErrorBag($factory);
+        if (is_null($this->error_bag)) {
+            $this->error_bag = new Error_Bag($factory);
         }
-
-        return $this->errorBag;
+        return $this->error_bag;
     }
-
-    protected function errorBag(): ErrorBag
+    protected function error_bag(): Error_Bag
     {
-        if (is_null($this->errorBag)) {
+        if (is_null($this->error_bag)) {
             throw new \RuntimeException('ErrorBag not initialized');
         }
-
-        return $this->errorBag;
+        return $this->error_bag;
     }
-
     public function __clone()
     {
-        $this->errorBag()->reset();
+        $this->error_bag()->reset();
     }
 }

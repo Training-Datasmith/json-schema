@@ -1,25 +1,21 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema\Constraints\Drafts\Draft07;
 
-namespace JsonSchema\Constraints\Drafts\Draft07;
-
-use JsonSchema\ConstraintError;
-use JsonSchema\Constraints\ConstraintInterface;
-use JsonSchema\Constraints\Factory;
-use JsonSchema\Entity\ErrorBagProxy;
-use JsonSchema\Entity\JsonPointer;
-
-class ContentConstraint implements ConstraintInterface
+use Json_Schema\Constraint_Error;
+use Json_Schema\Constraints\Constraint_Interface;
+use Json_Schema\Constraints\Factory;
+use Json_Schema\Entity\Error_Bag_Proxy;
+use Json_Schema\Entity\Json_Pointer;
+class Content_Constraint implements Constraint_Interface
 {
-    use ErrorBagProxy;
-
+    use Error_Bag_Proxy;
     public function __construct(?Factory $factory = null)
     {
-        $this->initialiseErrorBag($factory ?: new Factory());
+        $this->initialise_error_bag($factory ?: new Factory());
     }
-
-    public function check(&$value, $schema = null, ?JsonPointer $path = null, $i = null): void
+    public function check(&$value, $schema = null, ?Json_Pointer $path = null, $i = null): void
     {
         if (!property_exists($schema, 'contentMediaType') && !property_exists($schema, 'contentEncoding')) {
             return;
@@ -27,29 +23,24 @@ class ContentConstraint implements ConstraintInterface
         if (!is_string($value)) {
             return;
         }
-
-        $decodedValue = $value;
-
+        $decoded_value = $value;
         if (property_exists($schema, 'contentEncoding')) {
-            if ($schema->contentEncoding === 'base64') {
-                if (!preg_match('/^[A-Za-z0-9+\/=]+$/', $decodedValue)) {
-                    $this->addError(ConstraintError::CONTENT_ENCODING(), $path, ['contentEncoding' => $schema->contentEncoding]);
-
+            if ($schema->content_encoding === 'base64') {
+                if (!preg_match('/^[A-Za-z0-9+\/=]+$/', $decoded_value)) {
+                    $this->add_error(Constraint_Error::CONTENT_ENCODING(), $path, ['contentEncoding' => $schema->content_encoding]);
                     return;
                 }
-                $decodedValue = base64_decode($decodedValue);
+                $decoded_value = base64_decode($decoded_value);
             }
         }
-
         if (property_exists($schema, 'contentMediaType')) {
-            if ($schema->contentMediaType === 'application/json') {
-                json_decode($decodedValue, false);
+            if ($schema->content_media_type === 'application/json') {
+                json_decode($decoded_value, false);
                 if (json_last_error() === JSON_ERROR_NONE) {
                     return;
                 }
             }
-
-            $this->addError(ConstraintError::CONTENT_MEDIA_TYPE(), $path, ['contentMediaType' => $schema->contentMediaType]);
+            $this->add_error(Constraint_Error::CONTENT_MEDIA_TYPE(), $path, ['contentMediaType' => $schema->content_media_type]);
         }
     }
 }

@@ -1,11 +1,9 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema\Uri\Retrievers;
 
-namespace JsonSchema\Uri\Retrievers;
-
-use JsonSchema\Validator;
-
+use Json_Schema\Validator;
 /**
  * URI retrieved based on a predefined array of schemas
  *
@@ -18,7 +16,7 @@ use JsonSchema\Validator;
  *
  *      $schema = $retriever->retrieve('http://acme.com/schemas/person#');
  */
-class PredefinedArray extends AbstractRetriever
+class Predefined_Array extends Abstract_Retriever
 {
     /**
      * Contains schemas as URI => JSON
@@ -26,18 +24,16 @@ class PredefinedArray extends AbstractRetriever
      * @var array
      */
     private $schemas;
-
     /**
      * Constructor
      *
      * @param string $contentType
      */
-    public function __construct(array $schemas, $contentType = Validator::SCHEMA_MEDIA_TYPE)
+    public function __construct(array $schemas, $content_type = Validator::SCHEMA_MEDIA_TYPE)
     {
-        $this->schemas     = $schemas;
-        $this->contentType = $contentType;
+        $this->schemas = $schemas;
+        $this->content_type = $content_type;
     }
-
     /**
      * {@inheritdoc}
      *
@@ -46,12 +42,8 @@ class PredefinedArray extends AbstractRetriever
     public function retrieve($uri)
     {
         if (!array_key_exists($uri, $this->schemas)) {
-            throw new \JsonSchema\Exception\ResourceNotFoundException(sprintf(
-                'The JSON schema "%s" was not found.',
-                $uri
-            ));
+            throw new \Json_Schema\Exception\Resource_Not_Found_Exception(sprintf('The JSON schema "%s" was not found.', $uri));
         }
-
         return $this->schemas[$uri];
     }
 }

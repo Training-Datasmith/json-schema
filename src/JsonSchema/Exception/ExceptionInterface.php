@@ -1,9 +1,8 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema\Exception;
 
-namespace JsonSchema\Exception;
-
-interface ExceptionInterface
+interface Exception_Interface
 {
 }

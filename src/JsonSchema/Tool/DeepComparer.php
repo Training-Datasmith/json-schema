@@ -1,57 +1,48 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema\Tool;
 
-namespace JsonSchema\Tool;
-
-class DeepComparer
+class Deep_Comparer
 {
     /**
      * @param mixed $left
      * @param mixed $right
      */
-    public static function isEqual($left, $right): bool
+    public static function is_equal($left, $right): bool
     {
         if ($left === null && $right === null) {
             return true;
         }
-
-        $isLeftScalar = is_scalar($left);
-        $isLeftNumber = is_int($left) || is_float($left);
-        $isRightScalar = is_scalar($right);
-        $isRightNumber = is_int($right) || is_float($right);
-
-        if ($isLeftScalar && $isRightScalar) {
+        $is_left_scalar = is_scalar($left);
+        $is_left_number = is_int($left) || is_float($left);
+        $is_right_scalar = is_scalar($right);
+        $is_right_number = is_int($right) || is_float($right);
+        if ($is_left_scalar && $is_right_scalar) {
             /*
              * In Json-Schema mathematically equal numbers are compared equal
              */
-            if ($isLeftNumber && $isRightNumber && (float) $left === (float) $right) {
+            if ($is_left_number && $is_right_number && (float) $left === (float) $right) {
                 return true;
             }
-
             return $left === $right;
         }
-
-        if ($isLeftScalar !== $isRightScalar) {
+        if ($is_left_scalar !== $is_right_scalar) {
             return false;
         }
-
         if (is_array($left) && is_array($right)) {
-            return self::isArrayEqual($left, $right);
+            return self::is_array_equal($left, $right);
         }
-
         if ($left instanceof \stdClass && $right instanceof \stdClass) {
-            return self::isArrayEqual((array) $left, (array) $right);
+            return self::is_array_equal((array) $left, (array) $right);
         }
-
         return false;
     }
-
     /**
      * @param array<string|int, mixed> $left
      * @param array<string|int, mixed> $right
      */
-    private static function isArrayEqual(array $left, array $right): bool
+    private static function is_array_equal(array $left, array $right): bool
     {
         if (count($left) !== count($right)) {
             return false;
@@ -60,12 +51,10 @@ class DeepComparer
             if (!array_key_exists($key, $right)) {
                 return false;
             }
-
-            if (!self::isEqual($value, $right[$key])) {
+            if (!self::is_equal($value, $right[$key])) {
                 return false;
             }
         }
-
         return true;
     }
 }

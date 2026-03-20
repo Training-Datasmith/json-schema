@@ -1,14 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /**
  * JsonSchema
  *
  * @filesource
  */
-
-namespace JsonSchema\Uri\Retrievers;
+namespace Json_Schema\Uri\Retrievers;
 
 /**
  * AbstractRetriever implements the default shared behavior
@@ -16,22 +14,21 @@ namespace JsonSchema\Uri\Retrievers;
  *
  * @author Steven Garcia <webwhammy@gmail.com>
  */
-abstract class AbstractRetriever implements UriRetrieverInterface
+abstract class Abstract_Retriever implements Uri_Retriever_Interface
 {
     /**
      * Media content type
      *
      * @var string
      */
-    protected $contentType;
-
+    protected $content_type;
     /**
      * {@inheritdoc}
      *
      * @see \JsonSchema\Uri\Retrievers\UriRetrieverInterface::getContentType()
      */
-    public function getContentType()
+    public function get_content_type()
     {
-        return $this->contentType;
+        return $this->content_type;
     }
 }

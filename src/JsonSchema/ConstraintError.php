@@ -1,12 +1,10 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema;
 
-namespace JsonSchema;
-
-use JsonSchema\Exception\InvalidArgumentException;
-
-class ConstraintError extends Enum
+use Json_Schema\Exception\InvalidArgumentException;
+class Constraint_Error extends Enum
 {
     public const ADDITIONAL_ITEMS = 'additionalItems';
     public const ADDITIONAL_PROPERTIES = 'additionalProp';
@@ -60,13 +58,12 @@ class ConstraintError extends Enum
     public const UNIQUE_ITEMS = 'uniqueItems';
     public const CONTENT_MEDIA_TYPE = 'contentMediaType';
     public const CONTENT_ENCODING = 'contentEncoding';
-
     /**
      * @return string
      */
-    public function getMessage()
+    public function get_message()
     {
-        $name = $this->getValue();
+        $name = $this->get_value();
         static $messages = [
             self::ADDITIONAL_ITEMS => 'The item %s[%s] is not defined and the definition does not allow additional items',
             self::ADDITIONAL_PROPERTIES => 'The property %s is not defined and the definition does not allow additional properties',
@@ -121,11 +118,9 @@ class ConstraintError extends Enum
             self::CONTENT_MEDIA_TYPE => 'Value is not valid with content media type',
             self::CONTENT_ENCODING => 'Value is not valid with content encoding',
         ];
-
         if (!isset($messages[$name])) {
             throw new InvalidArgumentException('Missing error message for ' . $name);
         }
-
         return $messages[$name];
     }
 }

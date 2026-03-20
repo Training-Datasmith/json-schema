@@ -1,42 +1,35 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema\Constraints\Type_Check;
 
-namespace JsonSchema\Constraints\TypeCheck;
-
-class StrictTypeCheck implements TypeCheckInterface
+class Strict_Type_Check implements Type_Check_Interface
 {
-    public static function isObject($value): bool
+    public static function is_object($value): bool
     {
         return is_object($value);
     }
-
-    public static function isArray($value): bool
+    public static function is_array($value): bool
     {
         return is_array($value);
     }
-
-    public static function propertyGet($value, $property)
+    public static function property_get($value, $property)
     {
         return $value->{$property};
     }
-
-    public static function propertySet(&$value, $property, $data): void
+    public static function property_set(&$value, $property, $data): void
     {
         $value->{$property} = $data;
     }
-
-    public static function propertyExists($value, $property): bool
+    public static function property_exists($value, $property): bool
     {
         return property_exists($value, $property);
     }
-
-    public static function propertyCount($value): int
+    public static function property_count($value): int
     {
         if (!is_object($value)) {
             return 0;
         }
-
         return count(get_object_vars($value));
     }
 }

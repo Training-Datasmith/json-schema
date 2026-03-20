@@ -1,48 +1,39 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema\Constraints\Drafts\Draft07;
 
-namespace JsonSchema\Constraints\Drafts\Draft07;
-
-use JsonSchema\Constraints\ConstraintInterface;
-use JsonSchema\Entity\ErrorBagProxy;
-use JsonSchema\Entity\JsonPointer;
-
-class PropertiesConstraint implements ConstraintInterface
+use Json_Schema\Constraints\Constraint_Interface;
+use Json_Schema\Entity\Error_Bag_Proxy;
+use Json_Schema\Entity\Json_Pointer;
+class Properties_Constraint implements Constraint_Interface
 {
-    use ErrorBagProxy;
-
+    use Error_Bag_Proxy;
     /** @var Factory */
     private $factory;
-
     public function __construct(?Factory $factory = null)
     {
         $this->factory = $factory ?: new Factory();
-        $this->initialiseErrorBag($this->factory);
+        $this->initialise_error_bag($this->factory);
     }
-
-    public function check(&$value, $schema = null, ?JsonPointer $path = null, $i = null): void
+    public function check(&$value, $schema = null, ?Json_Pointer $path = null, $i = null): void
     {
         if (!property_exists($schema, 'properties')) {
             return;
         }
-
         if (!is_object($value)) {
             return;
         }
-
-        foreach ($schema->properties as $propertyName => $propertySchema) {
-            $schemaConstraint = $this->factory->createInstanceFor('schema');
-            if (!property_exists($value, $propertyName)) {
+        foreach ($schema->properties as $property_name => $property_schema) {
+            $schema_constraint = $this->factory->create_instance_for('schema');
+            if (!property_exists($value, $property_name)) {
                 continue;
             }
-
-            $schemaConstraint->check($value->{$propertyName}, $propertySchema, $path, $i);
-            if ($schemaConstraint->isValid()) {
+            $schema_constraint->check($value->{$property_name}, $property_schema, $path, $i);
+            if ($schema_constraint->is_valid()) {
                 continue;
             }
-
-            $this->addErrors($schemaConstraint->getErrors());
+            $this->add_errors($schema_constraint->get_errors());
         }
     }
 }

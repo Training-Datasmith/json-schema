@@ -1,20 +1,18 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the JsonSchema package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace JsonSchema;
+namespace Json_Schema;
 
 /**
  * @package JsonSchema
  */
-interface UriResolverInterface
+interface Uri_Resolver_Interface
 {
     /**
      * Resolves a URI
@@ -24,5 +22,5 @@ interface UriResolverInterface
      *
      * @return string Absolute URI
      */
-    public function resolve($uri, $baseUri = null);
+    public function resolve($uri, $base_uri = null);
 }

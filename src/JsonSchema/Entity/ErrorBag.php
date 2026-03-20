@@ -1,15 +1,13 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema\Entity;
 
-namespace JsonSchema\Entity;
-
-use JsonSchema\ConstraintError;
-use JsonSchema\Constraints\Constraint;
-use JsonSchema\Constraints\Factory;
-use JsonSchema\Exception\ValidationException;
-use JsonSchema\Validator;
-
+use Json_Schema\Constraint_Error;
+use Json_Schema\Constraints\Constraint;
+use Json_Schema\Constraints\Factory;
+use Json_Schema\Exception\Validation_Exception;
+use Json_Schema\Validator;
 /**
  * @phpstan-type Error array{
  *     "property": string,
@@ -20,90 +18,67 @@ use JsonSchema\Validator;
  * }
  * @phpstan-type ErrorList list<Error>
  */
-class ErrorBag
+class Error_Bag
 {
     /** @var Factory */
     private $factory;
-
     /** @var ErrorList */
     private $errors = [];
-
     /**
      * @var int-mask-of<Validator::ERROR_*> All error types that have occurred
      */
-    protected $errorMask = Validator::ERROR_NONE;
-
+    protected $error_mask = Validator::ERROR_NONE;
     public function __construct(Factory $factory)
     {
         $this->factory = $factory;
     }
-
     public function reset(): void
     {
         $this->errors = [];
-        $this->errorMask = Validator::ERROR_NONE;
+        $this->error_mask = Validator::ERROR_NONE;
     }
-
     /** @return ErrorList */
-    public function getErrors(): array
+    public function get_errors(): array
     {
         return $this->errors;
     }
-
     /** @param array<string, mixed> $more */
-    public function addError(ConstraintError $constraint, ?JsonPointer $path = null, array $more = []): void
+    public function add_error(Constraint_Error $constraint, ?Json_Pointer $path = null, array $more = []): void
     {
-        $message = $constraint->getMessage();
-        $name = $constraint->getValue();
+        $message = $constraint->get_message();
+        $name = $constraint->get_value();
         /** @var Error $error */
-        $error = [
-            'property' => $this->convertJsonPointerIntoPropertyPath($path ?: new JsonPointer('')),
-            'pointer' => ltrim((string) ($path ?: new JsonPointer('')), '#'),
-            'message' => ucfirst(vsprintf($message, array_map(static function ($val) {
-                if (is_scalar($val)) {
-                    return is_bool($val) ? var_export($val, true) : $val;
-                }
-
-                return json_encode($val);
-            }, array_values($more)))),
-            'constraint' => [
-                'name' => $name,
-                'params' => $more,
-            ],
-            'context' => $this->factory->getErrorContext(),
-        ];
-
-        if ($this->factory->getConfig(Constraint::CHECK_MODE_EXCEPTIONS)) {
-            throw new ValidationException(sprintf('Error validating %s: %s', $error['pointer'], $error['message']));
+        $error = ['property' => $this->convert_json_pointer_into_property_path($path ?: new Json_Pointer('')), 'pointer' => ltrim((string) ($path ?: new Json_Pointer('')), '#'), 'message' => ucfirst(vsprintf($message, array_map(static function ($val) {
+            if (is_scalar($val)) {
+                return is_bool($val) ? var_export($val, true) : $val;
+            }
+            return json_encode($val);
+        }, array_values($more)))), 'constraint' => ['name' => $name, 'params' => $more], 'context' => $this->factory->get_error_context()];
+        if ($this->factory->get_config(Constraint::CHECK_MODE_EXCEPTIONS)) {
+            throw new Validation_Exception(sprintf('Error validating %s: %s', $error['pointer'], $error['message']));
         }
         $this->errors[] = $error;
         /* @see https://github.com/phpstan/phpstan/issues/9384 */
-        $this->errorMask |= $error['context']; // @phpstan-ignore assign.propertyType
+        $this->error_mask |= $error['context'];
+        // @phpstan-ignore assign.propertyType
     }
-
     /** @param ErrorList $errors */
-    public function addErrors(array $errors): void
+    public function add_errors(array $errors): void
     {
         if (!$errors) {
             return;
         }
-
         $this->errors = array_merge($this->errors, $errors);
-        $errorMask = &$this->errorMask;
-        array_walk($errors, static function (array $error) use (&$errorMask): void {
-            $errorMask |= $error['context'];
+        $error_mask =& $this->error_mask;
+        array_walk($errors, static function (array $error) use (&$error_mask): void {
+            $error_mask |= $error['context'];
         });
     }
-
-    private function convertJsonPointerIntoPropertyPath(JsonPointer $pointer): string
+    private function convert_json_pointer_into_property_path(Json_Pointer $pointer): string
     {
-        $result = array_map(
-            static function (string $path): string {
-                return sprintf(is_numeric($path) ? '[%d]' : '.%s', $path);
-            },
-            $pointer->getPropertyPaths()
-        );
-
+        $result = array_map(static function (string $path): string {
+            return sprintf(is_numeric($path) ? '[%d]' : '.%s', $path);
+        }, $pointer->get_property_paths());
         return trim(implode('', $result), '.');
     }
 }

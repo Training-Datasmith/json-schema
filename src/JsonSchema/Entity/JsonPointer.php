@@ -1,36 +1,30 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the JsonSchema package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+namespace Json_Schema\Entity;
 
-namespace JsonSchema\Entity;
-
-use JsonSchema\Exception\InvalidArgumentException;
-
+use Json_Schema\Exception\InvalidArgumentException;
 /**
  * @package JsonSchema\Entity
  *
  * @author Joost Nijhuis <jnijhuis81@gmail.com>
  */
-class JsonPointer
+class Json_Pointer
 {
     /** @var string */
     private $filename;
-
     /** @var string[] */
-    private $propertyPaths = [];
-
+    private $property_paths = [];
     /**
      * @var bool Whether the value at this path was set from a schema default
      */
-    private $fromDefault = false;
-
+    private $from_default = false;
     /**
      * @param string $value
      *
@@ -41,102 +35,85 @@ class JsonPointer
         if (!is_string($value)) {
             throw new InvalidArgumentException('Ref value must be a string');
         }
-
-        $splitRef = explode('#', $value, 2);
-        $this->filename = $splitRef[0];
-        if (array_key_exists(1, $splitRef)) {
-            $this->propertyPaths = $this->decodePropertyPaths($splitRef[1]);
+        $split_ref = explode('#', $value, 2);
+        $this->filename = $split_ref[0];
+        if (array_key_exists(1, $split_ref)) {
+            $this->property_paths = $this->decode_property_paths($split_ref[1]);
         }
     }
-
     /**
      * @return string[]
      */
-    private function decodePropertyPaths(string $propertyPathString): array
+    private function decode_property_paths(string $property_path_string): array
     {
         $paths = [];
-        foreach (explode('/', trim($propertyPathString, '/')) as $path) {
-            $path = $this->decodePath($path);
+        foreach (explode('/', trim($property_path_string, '/')) as $path) {
+            $path = $this->decode_path($path);
             if (is_string($path) && '' !== $path) {
                 $paths[] = $path;
             }
         }
-
         return $paths;
     }
-
-    private function encodePropertyPaths(): array
+    private function encode_property_paths(): array
     {
-        return array_map(
-            [$this, 'encodePath'],
-            $this->getPropertyPaths()
-        );
+        return array_map([$this, 'encodePath'], $this->get_property_paths());
     }
-
-    private function decodePath(string $path): string
+    private function decode_path(string $path): string
     {
         return strtr($path, ['~1' => '/', '~0' => '~', '%25' => '%']);
     }
-
     /**
      * @param string $path
      */
-    private function encodePath($path): string
+    private function encode_path($path): string
     {
         return strtr($path, ['/' => '~1', '~' => '~0', '%' => '%25']);
     }
-
     /**
      * @return string
      */
-    public function getFilename()
+    public function get_filename()
     {
         return $this->filename;
     }
-
     /**
      * @return string[]
      */
-    public function getPropertyPaths()
+    public function get_property_paths()
     {
-        return $this->propertyPaths;
+        return $this->property_paths;
     }
-
-    public function withPropertyPaths(array $propertyPaths): self
+    public function with_property_paths(array $property_paths): self
     {
         $new = clone $this;
-        $new->propertyPaths = array_map(function ($p): string {
+        $new->property_paths = array_map(function ($p): string {
             return (string) $p;
-        }, $propertyPaths);
-
+        }, $property_paths);
         return $new;
     }
-
-    public function getPropertyPathAsString(): string
+    public function get_property_path_as_string(): string
     {
-        return rtrim('#/' . implode('/', $this->encodePropertyPaths()), '/');
+        return rtrim('#/' . implode('/', $this->encode_property_paths()), '/');
     }
-
     public function __toString(): string
     {
-        return $this->getFilename() . $this->getPropertyPathAsString();
+        return $this->get_filename() . $this->get_property_path_as_string();
     }
-
     /**
      * Mark the value at this path as being set from a schema default
      */
-    public function setFromDefault(): void
+    public function set_from_default(): void
     {
-        $this->fromDefault = true;
+        $this->from_default = true;
     }
-
     /**
      * Check whether the value at this path was set from a schema default
      *
      * @return bool
      */
-    public function fromDefault()
+    public function from_default()
     {
-        return $this->fromDefault;
+        return $this->from_default;
     }
 }

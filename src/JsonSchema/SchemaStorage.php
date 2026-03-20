@@ -1,237 +1,190 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema;
 
-namespace JsonSchema;
-
-use JsonSchema\Constraints\BaseConstraint;
-use JsonSchema\Entity\JsonPointer;
-use JsonSchema\Exception\UnresolvableJsonPointerException;
-use JsonSchema\Uri\UriResolver;
-use JsonSchema\Uri\UriRetriever;
-
-class SchemaStorage implements SchemaStorageInterface
+use Json_Schema\Constraints\Base_Constraint;
+use Json_Schema\Entity\Json_Pointer;
+use Json_Schema\Exception\Unresolvable_Json_Pointer_Exception;
+use Json_Schema\Uri\Uri_Resolver;
+use Json_Schema\Uri\Uri_Retriever;
+class Schema_Storage implements Schema_Storage_Interface
 {
     public const INTERNAL_PROVIDED_SCHEMA_URI = 'internal://provided-schema/';
-
-    protected $uriRetriever;
-    protected $uriResolver;
+    protected $uri_retriever;
+    protected $uri_resolver;
     protected $schemas = [];
-
-    public function __construct(
-        ?UriRetrieverInterface $uriRetriever = null,
-        ?UriResolverInterface $uriResolver = null
-    ) {
-        $this->uriRetriever = $uriRetriever ?: new UriRetriever();
-        $this->uriResolver = $uriResolver ?: new UriResolver();
+    public function __construct(?Uri_Retriever_Interface $uri_retriever = null, ?Uri_Resolver_Interface $uri_resolver = null)
+    {
+        $this->uri_retriever = $uri_retriever ?: new Uri_Retriever();
+        $this->uri_resolver = $uri_resolver ?: new Uri_Resolver();
     }
-
     /**
      * @return UriRetrieverInterface
      */
-    public function getUriRetriever()
+    public function get_uri_retriever()
     {
-        return $this->uriRetriever;
+        return $this->uri_retriever;
     }
-
     /**
      * @return UriResolverInterface
      */
-    public function getUriResolver()
+    public function get_uri_resolver()
     {
-        return $this->uriResolver;
+        return $this->uri_resolver;
     }
-
     /**
      * {@inheritdoc}
      */
-    public function addSchema(string $id, $schema = null): void
+    public function add_schema(string $id, $schema = null): void
     {
         if (is_null($schema) && $id !== self::INTERNAL_PROVIDED_SCHEMA_URI) {
             // if the schema was user-provided to Validator and is still null, then assume this is
             // what the user intended, as there's no way for us to retrieve anything else. User-supplied
             // schemas do not have an associated URI when passed via Validator::validate().
-            $schema = $this->uriRetriever->retrieve($id);
+            $schema = $this->uri_retriever->retrieve($id);
         }
-
         // cast array schemas to object
         if (is_array($schema)) {
-            $schema = BaseConstraint::arrayToObjectRecursive($schema);
+            $schema = Base_Constraint::array_to_object_recursive($schema);
         }
-
         // workaround for bug in draft-03 & draft-04 meta-schemas (id & $ref defined with incorrect format)
         // see https://github.com/json-schema-org/JSON-Schema-Test-Suite/issues/177#issuecomment-293051367
         if (is_object($schema) && property_exists($schema, 'id')) {
-            if ($schema->id === DraftIdentifiers::DRAFT_4) {
+            if ($schema->id === Draft_Identifiers::DRAFT_4) {
                 $schema->properties->id->format = 'uri-reference';
-            } elseif ($schema->id === DraftIdentifiers::DRAFT_3) {
+            } elseif ($schema->id === Draft_Identifiers::DRAFT_3) {
                 $schema->properties->id->format = 'uri-reference';
                 $schema->properties->{'$ref'}->format = 'uri-reference';
             }
         }
-
-        $this->scanForSubschemas($schema, $id);
-
+        $this->scan_for_subschemas($schema, $id);
         // resolve references
-        $this->expandRefs($schema, $id);
-
+        $this->expand_refs($schema, $id);
         $this->schemas[$id] = $schema;
     }
-
     /**
      * Recursively resolve all references against the provided base
      *
      * @param mixed        $schema
      * @param list<string> $propertyStack
      */
-    private function expandRefs(&$schema, ?string $parentId = null, array $propertyStack = []): void
+    private function expand_refs(&$schema, ?string $parent_id = null, array $property_stack = []): void
     {
         if (!is_object($schema)) {
             if (is_array($schema)) {
                 foreach ($schema as &$member) {
-                    $this->expandRefs($member, $parentId);
+                    $this->expand_refs($member, $parent_id);
                 }
             }
-
             return;
         }
-
         if (property_exists($schema, '$ref') && is_string($schema->{'$ref'})) {
-            $refPointer = new JsonPointer($this->uriResolver->resolve($schema->{'$ref'}, $parentId));
-            $schema->{'$ref'} = (string) $refPointer;
+            $ref_pointer = new Json_Pointer($this->uri_resolver->resolve($schema->{'$ref'}, $parent_id));
+            $schema->{'$ref'} = (string) $ref_pointer;
         }
-
-        $parentProperty = array_slice($propertyStack, -1)[0] ?? '';
-        foreach ($schema as $propertyName => &$member) {
-            if ($parentProperty !== 'properties' && in_array($propertyName, ['enum', 'const'])) {
+        $parent_property = array_slice($property_stack, -1)[0] ?? '';
+        foreach ($schema as $property_name => &$member) {
+            if ($parent_property !== 'properties' && in_array($property_name, ['enum', 'const'])) {
                 // Enum and const don't allow $ref as a keyword, see https://github.com/json-schema-org/JSON-Schema-Test-Suite/pull/445
                 continue;
             }
-
-            $schemaId = $this->findSchemaIdInObject($schema);
-            $childId = $parentId;
-            if (is_string($schemaId) && $childId !== $schemaId) {
-                $childId = $this->uriResolver->resolve($schemaId, $childId);
+            $schema_id = $this->find_schema_id_in_object($schema);
+            $child_id = $parent_id;
+            if (is_string($schema_id) && $child_id !== $schema_id) {
+                $child_id = $this->uri_resolver->resolve($schema_id, $child_id);
             }
-
-            $clonedPropertyStack = $propertyStack;
-            $clonedPropertyStack[] = $propertyName;
-            $this->expandRefs($member, $childId, $clonedPropertyStack);
+            $cloned_property_stack = $property_stack;
+            $cloned_property_stack[] = $property_name;
+            $this->expand_refs($member, $child_id, $cloned_property_stack);
         }
     }
-
     /**
      * {@inheritdoc}
      */
-    public function getSchema(string $id)
+    public function get_schema(string $id)
     {
         if (!array_key_exists($id, $this->schemas)) {
-            $this->addSchema($id);
+            $this->add_schema($id);
         }
-
         return $this->schemas[$id];
     }
-
     /**
      * {@inheritdoc}
      */
-    public function resolveRef(string $ref, $resolveStack = [])
+    public function resolve_ref(string $ref, $resolve_stack = [])
     {
-        $jsonPointer = new JsonPointer($ref);
-
+        $json_pointer = new Json_Pointer($ref);
         // resolve filename for pointer
-        $fileName = $jsonPointer->getFilename();
-        if (!strlen($fileName)) {
-            throw new UnresolvableJsonPointerException(sprintf(
-                "Could not resolve fragment '%s': no file is defined",
-                $jsonPointer->getPropertyPathAsString()
-            ));
+        $file_name = $json_pointer->get_filename();
+        if (!strlen($file_name)) {
+            throw new Unresolvable_Json_Pointer_Exception(sprintf("Could not resolve fragment '%s': no file is defined", $json_pointer->get_property_path_as_string()));
         }
-
         // get & process the schema
-        $refSchema = $this->getSchema($fileName);
-        foreach ($jsonPointer->getPropertyPaths() as $path) {
+        $ref_schema = $this->get_schema($file_name);
+        foreach ($json_pointer->get_property_paths() as $path) {
             $path = urldecode($path);
-            if (is_object($refSchema) && property_exists($refSchema, $path)) {
-                $refSchema = $this->resolveRefSchema($refSchema->{$path}, $resolveStack);
-            } elseif (is_array($refSchema) && array_key_exists($path, $refSchema)) {
-                $refSchema = $this->resolveRefSchema($refSchema[$path], $resolveStack);
+            if (is_object($ref_schema) && property_exists($ref_schema, $path)) {
+                $ref_schema = $this->resolve_ref_schema($ref_schema->{$path}, $resolve_stack);
+            } elseif (is_array($ref_schema) && array_key_exists($path, $ref_schema)) {
+                $ref_schema = $this->resolve_ref_schema($ref_schema[$path], $resolve_stack);
             } else {
-                throw new UnresolvableJsonPointerException(sprintf(
-                    'File: %s is found, but could not resolve fragment: %s',
-                    $jsonPointer->getFilename(),
-                    $jsonPointer->getPropertyPathAsString()
-                ));
+                throw new Unresolvable_Json_Pointer_Exception(sprintf('File: %s is found, but could not resolve fragment: %s', $json_pointer->get_filename(), $json_pointer->get_property_path_as_string()));
             }
         }
-
-        return $refSchema;
+        return $ref_schema;
     }
-
     /**
      * {@inheritdoc}
      */
-    public function resolveRefSchema($refSchema, $resolveStack = [])
+    public function resolve_ref_schema($ref_schema, $resolve_stack = [])
     {
-        if (is_object($refSchema) && property_exists($refSchema, '$ref') && is_string($refSchema->{'$ref'})) {
-            if (in_array($refSchema, $resolveStack, true)) {
-                throw new UnresolvableJsonPointerException(sprintf(
-                    'Dereferencing a pointer to %s results in an infinite loop',
-                    $refSchema->{'$ref'}
-                ));
+        if (is_object($ref_schema) && property_exists($ref_schema, '$ref') && is_string($ref_schema->{'$ref'})) {
+            if (in_array($ref_schema, $resolve_stack, true)) {
+                throw new Unresolvable_Json_Pointer_Exception(sprintf('Dereferencing a pointer to %s results in an infinite loop', $ref_schema->{'$ref'}));
             }
-            $resolveStack[] = $refSchema;
-
-            return $this->resolveRef($refSchema->{'$ref'}, $resolveStack);
+            $resolve_stack[] = $ref_schema;
+            return $this->resolve_ref($ref_schema->{'$ref'}, $resolve_stack);
         }
-
-        if (is_object($refSchema) && array_keys(get_object_vars($refSchema)) === ['']) {
-            return get_object_vars($refSchema)[''];
+        if (is_object($ref_schema) && array_keys(get_object_vars($ref_schema)) === ['']) {
+            return get_object_vars($ref_schema)[''];
         }
-
-        return $refSchema;
+        return $ref_schema;
     }
-
     /**
      * @param mixed $schema
      */
-    private function scanForSubschemas($schema, string $parentId): void
+    private function scan_for_subschemas($schema, string $parent_id): void
     {
-        if (!$schema instanceof \stdClass  && !is_array($schema)) {
+        if (!$schema instanceof \stdClass && !is_array($schema)) {
             return;
         }
-
-        foreach ($schema as $propertyName => $potentialSubSchema) {
-            if (!is_object($potentialSubSchema)) {
-                if (is_array($potentialSubSchema)) {
-                    foreach ($potentialSubSchema as $potentialSubSchemaItem) {
-                        $this->scanForSubschemas($potentialSubSchemaItem, $parentId);
+        foreach ($schema as $property_name => $potential_sub_schema) {
+            if (!is_object($potential_sub_schema)) {
+                if (is_array($potential_sub_schema)) {
+                    foreach ($potential_sub_schema as $potential_sub_schema_item) {
+                        $this->scan_for_subschemas($potential_sub_schema_item, $parent_id);
                     }
                 }
                 continue;
             }
-
-            $potentialSubSchemaId = $this->findSchemaIdInObject($potentialSubSchema);
-            if (is_string($potentialSubSchemaId) && property_exists($potentialSubSchema, 'type')) {
+            $potential_sub_schema_id = $this->find_schema_id_in_object($potential_sub_schema);
+            if (is_string($potential_sub_schema_id) && property_exists($potential_sub_schema, 'type')) {
                 // Enum and const don't allow id as a keyword, see https://github.com/json-schema-org/JSON-Schema-Test-Suite/pull/471
-                if (in_array($propertyName, ['enum', 'const'])) {
+                if (in_array($property_name, ['enum', 'const'])) {
                     continue;
                 }
-
                 // $id in unknow keywords is not valid
-                if (in_array($propertyName, [])) {
+                if (in_array($property_name, [])) {
                     continue;
                 }
-
                 // Found sub schema
-                $this->addSchema($this->uriResolver->resolve($potentialSubSchemaId, $parentId), $potentialSubSchema);
+                $this->add_schema($this->uri_resolver->resolve($potential_sub_schema_id, $parent_id), $potential_sub_schema);
             }
-
-            $this->scanForSubschemas($potentialSubSchema, $parentId);
+            $this->scan_for_subschemas($potential_sub_schema, $parent_id);
         }
     }
-
-    private function findSchemaIdInObject(object $schema): ?string
+    private function find_schema_id_in_object(object $schema): ?string
     {
         if (property_exists($schema, 'id') && is_string($schema->id)) {
             return $schema->id;
@@ -239,7 +192,6 @@ class SchemaStorage implements SchemaStorageInterface
         if (property_exists($schema, '$id') && is_string($schema->{'$id'})) {
             return $schema->{'$id'};
         }
-
         return null;
     }
 }

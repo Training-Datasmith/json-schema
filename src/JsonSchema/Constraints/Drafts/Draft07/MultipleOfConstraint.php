@@ -1,54 +1,44 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema\Constraints\Drafts\Draft07;
 
-namespace JsonSchema\Constraints\Drafts\Draft07;
-
-use JsonSchema\ConstraintError;
-use JsonSchema\Constraints\ConstraintInterface;
-use JsonSchema\Constraints\Factory;
-use JsonSchema\Entity\ErrorBagProxy;
-use JsonSchema\Entity\JsonPointer;
-
-class MultipleOfConstraint implements ConstraintInterface
+use Json_Schema\Constraint_Error;
+use Json_Schema\Constraints\Constraint_Interface;
+use Json_Schema\Constraints\Factory;
+use Json_Schema\Entity\Error_Bag_Proxy;
+use Json_Schema\Entity\Json_Pointer;
+class Multiple_Of_Constraint implements Constraint_Interface
 {
-    use ErrorBagProxy;
-
+    use Error_Bag_Proxy;
     public function __construct(?Factory $factory = null)
     {
-        $this->initialiseErrorBag($factory ?: new Factory());
+        $this->initialise_error_bag($factory ?: new Factory());
     }
-
-    public function check(&$value, $schema = null, ?JsonPointer $path = null, $i = null): void
+    public function check(&$value, $schema = null, ?Json_Pointer $path = null, $i = null): void
     {
         if (!property_exists($schema, 'multipleOf')) {
             return;
         }
-
-        if (!is_int($schema->multipleOf) && !is_float($schema->multipleOf) && $schema->multipleOf <= 0.0) {
+        if (!is_int($schema->multiple_of) && !is_float($schema->multiple_of) && $schema->multiple_of <= 0.0) {
             return;
         }
-
         if (!is_int($value) && !is_float($value)) {
             return;
         }
-
-        if ($this->isMultipleOf($value, $schema->multipleOf)) {
+        if ($this->is_multiple_of($value, $schema->multiple_of)) {
             return;
         }
-
-        $this->addError(ConstraintError::MULTIPLE_OF(), $path, ['multipleOf' => $schema->multipleOf, 'found' => $value]);
+        $this->add_error(Constraint_Error::MULTIPLE_OF(), $path, ['multipleOf' => $schema->multiple_of, 'found' => $value]);
     }
-
     /**
      * @param int|float $number1
      * @param int|float $number2
      */
-    private function isMultipleOf($number1, $number2): bool
+    private function is_multiple_of($number1, $number2): bool
     {
-        $modulus = ($number1 - round($number1 / $number2) * $number2);
-        $precision = 0.0000000001;
-
+        $modulus = $number1 - round($number1 / $number2) * $number2;
+        $precision = 1.0E-10;
         return -$precision < $modulus && $modulus < $precision;
     }
 }

@@ -1,20 +1,18 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the JsonSchema package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace JsonSchema;
+namespace Json_Schema;
 
 /**
  * @package JsonSchema
  */
-interface UriRetrieverInterface
+interface Uri_Retriever_Interface
 {
     /**
      * Retrieve a URI
@@ -24,5 +22,5 @@ interface UriRetrieverInterface
      *
      * @return object JSON Schema contents
      */
-    public function retrieve($uri, $baseUri = null);
+    public function retrieve($uri, $base_uri = null);
 }

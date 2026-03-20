@@ -1,9 +1,8 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema;
 
-namespace JsonSchema;
-
-abstract class Enum extends \MabeEnum\Enum
+abstract class Enum extends \Mabe_Enum\Enum
 {
 }

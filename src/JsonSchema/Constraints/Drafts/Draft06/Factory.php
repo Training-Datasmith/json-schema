@@ -1,46 +1,12 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema\Constraints\Drafts\Draft06;
 
-namespace JsonSchema\Constraints\Drafts\Draft06;
-
-class Factory extends \JsonSchema\Constraints\Factory
+class Factory extends \Json_Schema\Constraints\Factory
 {
     /**
      * @var array<string, class-string>
      */
-    protected $constraintMap = [
-        'schema' => Draft06Constraint::class,
-        'additionalProperties' => AdditionalPropertiesConstraint::class,
-        'additionalItems' => AdditionalItemsConstraint::class,
-        'dependencies' => DependenciesConstraint::class,
-        'type' => TypeConstraint::class,
-        'const' => ConstConstraint::class,
-        'enum' => EnumConstraint::class,
-        'uniqueItems' => UniqueItemsConstraint::class,
-        'minItems' => MinItemsConstraint::class,
-        'minProperties' => MinPropertiesConstraint::class,
-        'maxProperties' => MaxPropertiesConstraint::class,
-        'minimum' => MinimumConstraint::class,
-        'maximum' => MaximumConstraint::class,
-        'exclusiveMinimum' => ExclusiveMinimumConstraint::class,
-        'minLength' => MinLengthConstraint::class,
-        'maxLength' => MaxLengthConstraint::class,
-        'maxItems' => MaxItemsConstraint::class,
-        'exclusiveMaximum' => ExclusiveMaximumConstraint::class,
-        'multipleOf' => MultipleOfConstraint::class,
-        'required' => RequiredConstraint::class,
-        'format' => FormatConstraint::class,
-        'anyOf' => AnyOfConstraint::class,
-        'allOf' => AllOfConstraint::class,
-        'oneOf' => OneOfConstraint::class,
-        'not' => NotConstraint::class,
-        'contains' => ContainsConstraint::class,
-        'propertyNames' => PropertiesNamesConstraint::class,
-        'patternProperties' => PatternPropertiesConstraint::class,
-        'pattern' => PatternConstraint::class,
-        'properties' => PropertiesConstraint::class,
-        'items' => ItemsConstraint::class,
-        'ref' => RefConstraint::class,
-    ];
+    protected $constraint_map = ['schema' => Draft06Constraint::class, 'additionalProperties' => Additional_Properties_Constraint::class, 'additionalItems' => Additional_Items_Constraint::class, 'dependencies' => Dependencies_Constraint::class, 'type' => Type_Constraint::class, 'const' => Const_Constraint::class, 'enum' => Enum_Constraint::class, 'uniqueItems' => Unique_Items_Constraint::class, 'minItems' => Min_Items_Constraint::class, 'minProperties' => Min_Properties_Constraint::class, 'maxProperties' => Max_Properties_Constraint::class, 'minimum' => Minimum_Constraint::class, 'maximum' => Maximum_Constraint::class, 'exclusiveMinimum' => Exclusive_Minimum_Constraint::class, 'minLength' => Min_Length_Constraint::class, 'maxLength' => Max_Length_Constraint::class, 'maxItems' => Max_Items_Constraint::class, 'exclusiveMaximum' => Exclusive_Maximum_Constraint::class, 'multipleOf' => Multiple_Of_Constraint::class, 'required' => Required_Constraint::class, 'format' => Format_Constraint::class, 'anyOf' => Any_Of_Constraint::class, 'allOf' => All_Of_Constraint::class, 'oneOf' => One_Of_Constraint::class, 'not' => Not_Constraint::class, 'contains' => Contains_Constraint::class, 'propertyNames' => Properties_Names_Constraint::class, 'patternProperties' => Pattern_Properties_Constraint::class, 'pattern' => Pattern_Constraint::class, 'properties' => Properties_Constraint::class, 'items' => Items_Constraint::class, 'ref' => Ref_Constraint::class];
 }

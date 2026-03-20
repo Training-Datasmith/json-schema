@@ -1,67 +1,53 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types=1);
+namespace Json_Schema\Constraints\Drafts\Draft07;
 
-namespace JsonSchema\Constraints\Drafts\Draft07;
-
-use JsonSchema\Constraints\ConstraintInterface;
-use JsonSchema\Entity\ErrorBagProxy;
-use JsonSchema\Entity\JsonPointer;
-
-class IfThenElseConstraint implements ConstraintInterface
+use Json_Schema\Constraints\Constraint_Interface;
+use Json_Schema\Entity\Error_Bag_Proxy;
+use Json_Schema\Entity\Json_Pointer;
+class If_Then_Else_Constraint implements Constraint_Interface
 {
-    use ErrorBagProxy;
-
+    use Error_Bag_Proxy;
     /** @var Factory */
     private $factory;
-
     public function __construct(?Factory $factory = null)
     {
         $this->factory = $factory ?: new Factory();
-        $this->initialiseErrorBag($this->factory);
+        $this->initialise_error_bag($this->factory);
     }
-
-    public function check(&$value, $schema = null, ?JsonPointer $path = null, $i = null): void
+    public function check(&$value, $schema = null, ?Json_Pointer $path = null, $i = null): void
     {
         if (!property_exists($schema, 'if')) {
             return;
         }
-
-        $schemaConstraint = $this->factory->createInstanceFor('schema');
-        $ifSchema = $schema->if;
-
-        if (!is_bool($ifSchema)) {
-            $schemaConstraint->check($value, $ifSchema, $path, $i);
-            $meetsIfConditions = $schemaConstraint->isValid();
-            $schemaConstraint->reset();
+        $schema_constraint = $this->factory->create_instance_for('schema');
+        $if_schema = $schema->if;
+        if (!is_bool($if_schema)) {
+            $schema_constraint->check($value, $if_schema, $path, $i);
+            $meets_if_conditions = $schema_constraint->is_valid();
+            $schema_constraint->reset();
         } else {
-            $meetsIfConditions = $ifSchema;
+            $meets_if_conditions = $if_schema;
         }
-
-        if ($meetsIfConditions) {
+        if ($meets_if_conditions) {
             if (!property_exists($schema, 'then')) {
                 return;
             }
-
-            $schemaConstraint->check($value, $schema->then, $path, $i);
-            if ($schemaConstraint->isValid()) {
+            $schema_constraint->check($value, $schema->then, $path, $i);
+            if ($schema_constraint->is_valid()) {
                 return;
             }
-
-            $this->addErrors($schemaConstraint->getErrors());
-
+            $this->add_errors($schema_constraint->get_errors());
             return;
         }
-
         if (!property_exists($schema, 'else')) {
             return;
         }
-
-        $schemaConstraint->check($value, $schema->else, $path, $i);
-        if ($schemaConstraint->isValid()) {
+        $schema_constraint->check($value, $schema->else, $path, $i);
+        if ($schema_constraint->is_valid()) {
             return;
         }
-
-        $this->addErrors($schemaConstraint->getErrors());
+        $this->add_errors($schema_constraint->get_errors());
     }
 }

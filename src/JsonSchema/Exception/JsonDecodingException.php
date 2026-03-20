@@ -1,20 +1,18 @@
 <?php
 
-declare(strict_types=1);
-
+declare (strict_types=1);
 /*
  * This file is part of the JsonSchema package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-namespace JsonSchema\Exception;
+namespace Json_Schema\Exception;
 
 /**
  * Wrapper for the JsonDecodingException
  */
-class JsonDecodingException extends RuntimeException
+class Json_Decoding_Exception extends RuntimeException
 {
     public function __construct($code = JSON_ERROR_NONE, ?\Exception $previous = null)
     {
